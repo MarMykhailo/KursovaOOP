@@ -53,8 +53,8 @@ public:
 		QuickSort<Dlist<Song>, Song>(songList,0, songList.getSize() - 1, Compare);
 	}
 
-	//friend std::ofstream& operator<< (std::ofstream& Out, SongManager& songManager);
-	//friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
+	friend std::ofstream& operator<< (std::ofstream& Out, SongManager& songManager);
+	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
 	
 };
 

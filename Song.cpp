@@ -71,7 +71,8 @@ Song::~Song()
 {
 	this->clear();
 }
-#pragma region гетери і сетори 
+
+#pragma region Гетери і Сетери 
 std::vector<std::string> Song::getSongers() const
 {
 	return this->songers;
@@ -145,6 +146,7 @@ void Song::setIsImport(bool IsImport)
 {
 	this->isImport = IsImport;
 }
+#pragma endregion
 
 Song& Song::operator = (const Song& Other)
 {
@@ -174,8 +176,6 @@ void Song::clear()
 	this->size = 0;
 	this->isImport = false;
 }
-
-
 
 std::ofstream& operator<<(std::ofstream& out, const Song& song)
 {
