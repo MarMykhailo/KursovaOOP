@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include <fstream>
 
-
 template <typename T>
 class Dlist {
 private:
@@ -22,7 +21,7 @@ public:
 
     Dlist() : head(nullptr), tail(nullptr), size(0) {}
 
-    int getSize() const {
+    int getSize()  {
         return size;
     }
 
@@ -74,6 +73,17 @@ public:
         return current->data;
     }
 
+    Node& at(int index) {
+        if (index < 0 || index >= size) {
+			throw std::out_of_range("Index out of range");
+		}
+		Node* current = head;
+        for (int i = 0; i < index; i++) {
+			current = current->next;
+		}
+		return *current;
+	}
+
 
     int find(const T& value) const {
         Node* current = head;
@@ -88,17 +98,20 @@ public:
         return -1; // елемент не знайдено
     }
 
-    void Swap(T& A, T& B) {
-        Node* tempNext = A.next;
-        Node* tempPrev = A.prev;
 
-        A.next = B.next;
-        A.prev = B.prev;
+    void swap(int A, int B) {
+        Node& tempA = at(A);
+        Node& tempB = at(B);
 
-        B.next = tempNext;
-        B.prev = tempPrev;
+        Node* tempNext = tempA.next;
+        Node* tempPrev = tempA.prev;
+
+        tempA.next = tempB.next;
+        tempA.prev = tempB.prev;
+
+        tempB.next = tempNext;
+        tempB.prev = tempPrev;
     }
-
 
 
 
@@ -123,83 +136,13 @@ public:
         return *this;
     }
 
-    //void writeToFile(const std::string& filename) const {
-    //    std::ofstream file(filename);
-    //    if (file.is_open()) {
-    //        Node* current = head;
-    //        while (current != nullptr) {
-    //            file << current->data << " ";
-    //            current = current->next;
-    //        }
-    //        file.close();
-    //    }
-    //    else {
-    //        throw std::runtime_error("Unable to open the file");
-    //    }
-    //}
-
-    //void readFromFile(const std::string& filename) {
-    //    clear();
-    //    std::ifstream file(filename);
-    //    if (file.is_open()) {
-    //        T value;
-    //        while (file >> value) {
-    //            push_back(value);
-    //        }
-    //        file.close();
-    //    }
-    //    else {
-    //        throw std::runtime_error("Unable to open the file");
-    //    }
-    //}
-
-
     friend std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list);
 
     friend std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list);
-
-        // Визначення оператора << для запису у файл
-    //friend std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list) {
-    //    typename Dlist<T>::Node* current = list.head;
-    //    while (current != nullptr) {
-    //        out << current->data << " ";
-    //        current = current->next;
-    //    }
-    //    return out;
-    //}
-
-    //// Визначення оператора >> для зчитування з файлу
-    //friend std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {
-    //    list.clear(); // Переконайтеся, що ви визначили функцію clear() для класу Dlist
-    //    T value;
-    //    while (in >> value) {
-    //        list.push_back(value);
-    //    }
-    //    return in;
-    //}
 
 };
 
 
 
-template<typename T>
-std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list)
-{
-    typename Dlist<T>::Node* current = list.head;
-    while (current != nullptr) {
-        out << current->data << " ";
-        current = current->next;
-    }
-    return out;
-}
 
-template<typename T>
-std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {
-    list.clear(); // Ensure to define the clear function in your Dlist class
-    T value;
-    while (in >> value) {
-        list.push_back(value);
-    }
-    return in;
-}
 

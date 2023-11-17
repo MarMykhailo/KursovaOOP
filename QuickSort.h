@@ -1,32 +1,32 @@
 ﻿#pragma once
 
-template<typename T>
-static void QuickSort(T* arr, int first, int last, int (pCompare)(T& A, T& B), void (pSwap)(T* arr, int a, int b))
+template<typename C, typename T>
+static void QuickSort(C& container, int first, int last, int (pCompare)(const T& A,const T& B))
 {
 	if (first < last)
 	{
 		int left = first;
 		int right = last;
-		T pivot = arr[left + right) / 2]; // Обираємо середній елемент як опорний
+		T pivot = container[(left + right) / 2]; // Обираємо середній елемент як опорний
 
 		while (left <= right)
 		{
-			while (pCompare(arr[left], pivot))
+			while (pCompare(container[left], pivot))
 				left++;
-			while (pCompare(pivot, arr[right]))
+			while (pCompare(pivot, container[right]))
 				right--;
 
 			if (left <= right)
 			{
-				pSwap(arr, left, right);
+				container.swap(left, right);
 				left++;
 				right--;
 			}
 		}
 
 		// Рекурсивно сортуємо підмасиви
-		QuickSort(arr, first, right, pCompare, pSwap);
-		QuickSort(arr, left, last, pCompare, pSwap);
+		QuickSort(container, first, right, pCompare);
+		QuickSort(container, left, last, pCompare);
 	}
 }
 

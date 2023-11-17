@@ -119,6 +119,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Compare.cpp" />
+    <ClCompile Include="Dlist.cpp" />
     <ClCompile Include="Kursova.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Song.cpp" />
@@ -126,6 +128,7 @@
     <ClCompile Include="SongManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compare.h" />
     <ClInclude Include="Dlist.h" />
     <ClInclude Include="Kursova.h">
       <FileType>CppForm</FileType>

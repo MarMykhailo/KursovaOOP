@@ -1,117 +1,17 @@
-//#include "SongManager.h"
-//
-//
-//
-//
-//
-//int CompareSongers(const Song& A,const Song& B)
+#include "SongManager.h"
+
+
+
+//std::ofstream& operator<< (std::ofstream& Out, SongManager& songManager)
 //{
-//	if (A.getSongers() == B.getSongers())
-//	{
-//		return 1;
-//	}
-//	else if (A.getSongers() > B.getSongers())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
+//	Out << songManager.songList;
+//	return Out;
 //}
-//
-//int CompareName(const Song& A, const Song& B)
+//std::ifstream& operator>> (std::ifstream& In, SongManager& songManager)
 //{
-//	if (A.getName() == B.getName())
-//	{
-//		return 1;
-//	}
-//	else if (A.getName() > B.getName())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
+//	In >> songManager.songList;
+//	return In;
 //}
-//
-//int CompareAlbom(const Song& A, const Song& B)
-//{
-//	if (A.getAlbom() == B.getAlbom())
-//	{
-//		return 1;
-//	}
-//	else if (A.getAlbom() > B.getAlbom())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
-//
-//int CompareYear(const Song& A, const Song& B)
-//{
-//	if (A.getYear() == B.getYear())
-//	{
-//		return 1;
-//	}
-//	else if (A.getYear() > B.getYear())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
-//
-//int CompareFormat(const Song& A, const Song& B)
-//{
-//	if (A.getFormat() == B.getFormat())
-//	{
-//		return 1;
-//	}
-//	else if (A.getFormat() > B.getFormat())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
-//
-//int CompareSize(const Song& A, const Song& B)
-//{
-//	if (A.getSize() == B.getSize())
-//	{
-//		return 1;
-//	}
-//	else if (A.getSize() > B.getSize())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
-//
-//int CompareIsImport(const Song& A, const Song& B)
-//{
-//	if (A.getIsImport() == B.getIsImport())
-//	{
-//		return 1;
-//	}
-//	else if (A.getIsImport() > B.getIsImport())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
+
+
+
