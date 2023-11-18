@@ -1,18 +1,6 @@
 ﻿#include "Song.h"
 
 
-//Song::
-//	std::vector<std::string> songers;
-//	std::string name;
-//	std::string albom;
-//	int year;
-//	//тривалість
-//	std::string format;//первірити чи правильно 
-//	int size;//розмір
-//	bool isImport;
-
-
-
 Song::Song()
 {
 	this->songers.push_back("Non");

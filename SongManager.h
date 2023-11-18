@@ -50,13 +50,25 @@ public:
 
 	void sort(int (Compare)(const Song& A, const Song& B))
 	{
-		QuickSort<Dlist<Song>, Song>(songList,0, songList.getSize() - 1, Compare);
+		QuickSort<Dlist<Song>, Song>(songList,0, songList.getSize(), Compare);
 	}
 
 	friend std::ofstream& operator<< (std::ofstream& Out, SongManager& songManager);
 	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
 	
 };
+
+
+std::ofstream& operator<< (std::ofstream& Out, SongManager& songManager)
+{
+	Out << songManager.songList;
+	return Out;
+}
+std::ifstream& operator>> (std::ifstream& In, SongManager& songManager)
+{
+	In >> songManager.songList;
+	return In;
+}
 
 
 
