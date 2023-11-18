@@ -6,8 +6,9 @@ class Dlist {
 private:
     struct Node {
         T data;
-        Node* next;
-        Node* prev;
+        Node* next = nullptr;
+        Node* prev = nullptr;
+
         Node(const T& data, Node* next = nullptr, Node* prev = nullptr)
             : data(data), next(next), prev(prev) {}
     };
@@ -153,6 +154,8 @@ std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list)
     }
     return out;
 }
+
+
 
 template<typename T>
 std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {

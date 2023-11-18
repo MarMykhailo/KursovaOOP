@@ -16,7 +16,8 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 	}
 	else
 	{
-		out << *songManager;
+        //out << (*songManager);
+        out.close();
 	}
 	return System::Void();
 }
@@ -37,9 +38,10 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	}
 	else
 	{
-		in >> *songManager;
+		//in >> (*songManager);
+        in.close();
 	}
-
+    
 	UpdateTable();
 
 	return System::Void();
