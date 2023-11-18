@@ -33,6 +33,9 @@
     <ClCompile Include="Dlist.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Compare.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Kursova.h">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Dlist.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Compare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "SongManager.h"
+#include <msclr\marshal_cppstd.h>
 namespace KursovaOOP {
 
 	//class SongManager;
@@ -28,7 +29,7 @@ namespace KursovaOOP {
 		}
 
 	protected:
-		/// <summary>
+		/// <summary>/
 		/// Clean up any resources being used.
 		/// </summary>
 		~Kursova()

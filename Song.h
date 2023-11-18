@@ -51,13 +51,7 @@ public:
     friend std::ifstream& operator>>(std::ifstream& in, Song& song);
 };
 
+std::ofstream& operator<<(std::ofstream& out, const Song& song);
 
-int CompareSongers(const Song& A, const Song& B);
-//int CompareName(const Song& A, const Song& B);
-//int CompareAlbom(const Song& A, const Song& B);
-int CompareYear(const Song& A, const Song& B);
-//int CompareFormat(const Song& A, const Song& B);
-//int CompareSize(const Song& A, const Song& B);
-//int CompareIsImport(const Song& A, const Song& B);
-
+std::ifstream& operator>>(std::ifstream& in, Song& song);
 

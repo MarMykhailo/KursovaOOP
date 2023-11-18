@@ -1,5 +1,4 @@
 ﻿#include "Kursova.h"
-#include <msclr\marshal_cppstd.h>
 
 System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -122,7 +121,7 @@ System::Void KursovaOOP::Kursova::UpdateTable()
 
 System::Void KursovaOOP::Kursova::tsmiSSonger_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    songManager->sort(CompareSongers);
+   // songManager->sort(CompareSongers);
     UpdateTable();
     return System::Void();
 }
@@ -143,7 +142,7 @@ System::Void KursovaOOP::Kursova::tsmiSAlbom_Click(System::Object^ sender, Syste
 
 System::Void KursovaOOP::Kursova::tsmiSYear_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    songManager->sort(CompareYear);
+    //songManager->sort(CompareYear);
     UpdateTable();
     return System::Void();
 }

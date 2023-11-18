@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 template<typename C, typename T>
-static void QuickSort(C& container, int first, int last, int (pCompare)(const T& A,const T& B))
+void QuickSort(C& container, int first, int last, int (pCompare)(const T& A,const T& B))
 {
 	if (first < last)
 	{
