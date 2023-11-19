@@ -82,36 +82,43 @@ System::Void KursovaOOP::Kursova::UpdateTable()
         Label^ songerLabel = gcnew Label();
         songerLabel->Text = gcnew String(allSongers.c_str());
         songerLabel->AutoSize = true;
+        songerLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);  // Додайте обробник подій
         tlpTable->Controls->Add(songerLabel, 1, i + 1);
 
         Label^ nameLabel = gcnew Label();
         nameLabel->Text = gcnew String(currentSong.getName().c_str());
         nameLabel->AutoSize = true;
+        nameLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(nameLabel, 2, i + 1);
 
         Label^ albomLabel = gcnew Label();
         albomLabel->Text = gcnew String(currentSong.getAlbom().c_str());
         albomLabel->AutoSize = true;
+        albomLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(albomLabel, 3, i + 1);
 
         Label^ yearLabel = gcnew Label();
         yearLabel->Text = currentSong.getYear().ToString();
         yearLabel->AutoSize = true;
+        yearLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(yearLabel, 4, i + 1);
 
         Label^ formatLabel = gcnew Label();
         formatLabel->Text = gcnew String(currentSong.getFormat().c_str());
         formatLabel->AutoSize = true;
+        formatLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(formatLabel, 5, i + 1);
 
         Label^ sizeLabel = gcnew Label();
         sizeLabel->Text = currentSong.getSize().ToString();
         sizeLabel->AutoSize = true;
+        sizeLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(sizeLabel, 6, i + 1);
 
         Label^ isImportLabel = gcnew Label();
         isImportLabel->Text = currentSong.getIsImport() ? "Yes" : "No";
         isImportLabel->AutoSize = true;
+        isImportLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(isImportLabel, 7, i + 1);
     }
 

@@ -114,7 +114,31 @@ public:
         tempB.prev = tempPrev;
     }
 
+    void removeAt(int index) {
+        if (index < 0 || index >= size) {
+            throw std::out_of_range("Index out of range");
+        }
 
+        Node* nodeToRemove = &at(index);
+
+        // Видаляємо елемент з двобічної черги
+        if (nodeToRemove->prev) {
+            nodeToRemove->prev->next = nodeToRemove->next;
+        }
+        else {
+            head = nodeToRemove->next;
+        }
+
+        if (nodeToRemove->next) {
+            nodeToRemove->next->prev = nodeToRemove->prev;
+        }
+        else {
+            tail = nodeToRemove->prev;
+        }
+
+        delete nodeToRemove;
+        size--;
+    }
 
     void clear() {
         Node* current = head;

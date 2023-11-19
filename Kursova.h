@@ -28,6 +28,7 @@ namespace KursovaOOP {
 			//
 			//TODO: Add the constructor code here
 			//
+			
 		}
 
 	protected:
@@ -158,6 +159,36 @@ private: System::Windows::Forms::ToolStripButton^ toolStripButton1;
 private: System::Windows::Forms::ContextMenuStrip^ cmsMenu;
 private: System::Windows::Forms::ToolStripMenuItem^ cmsDelete;
 private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
+private: System::Windows::Forms::ToolStripTextBox^ cmstbSongers;
+
+private: System::Windows::Forms::ToolStripTextBox^ cmstbName;
+
+private: System::Windows::Forms::ToolStripTextBox^ cmstbAlbom;
+
+private: System::Windows::Forms::ToolStripTextBox^ cmstbYear;
+
+private: System::Windows::Forms::ToolStripTextBox^ cmstbFormat;
+
+private: System::Windows::Forms::ToolStripTextBox^ cmstbSize;
+
+
+
+
+
+
+
+
+
+
+private: System::Windows::Forms::ToolTip^ ttTip;
+private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
+
+
+
+
+
+
+
 
 
 
@@ -243,6 +274,14 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->cmsMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->cmsDelete = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cmsAdd = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->cmstbSongers = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbName = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbAlbom = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbYear = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbFormat = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbSize = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmstbIsImport = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->ttTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->gbMenu->SuspendLayout();
 			this->gbIterface->SuspendLayout();
 			this->tlpTable->SuspendLayout();
@@ -291,6 +330,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->gbIterface->Size = System::Drawing::Size(516, 542);
 			this->gbIterface->TabIndex = 0;
 			this->gbIterface->TabStop = false;
+			this->gbIterface->MouseCaptureChanged += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// tlpTable
 			// 
@@ -332,6 +372,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lNumber->Size = System::Drawing::Size(21, 16);
 			this->lNumber->TabIndex = 0;
 			this->lNumber->Text = L"№";
+			this->lNumber->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lIsImport
 			// 
@@ -341,6 +382,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lIsImport->Size = System::Drawing::Size(76, 16);
 			this->lIsImport->TabIndex = 7;
 			this->lIsImport->Text = L"Зарубіжна";
+			this->lIsImport->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lSonger
 			// 
@@ -350,6 +392,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lSonger->Size = System::Drawing::Size(93, 16);
 			this->lSonger->TabIndex = 1;
 			this->lSonger->Text = L"Виконавець\\і";
+			this->lSonger->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lSize
 			// 
@@ -359,6 +402,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lSize->Size = System::Drawing::Size(52, 16);
 			this->lSize->TabIndex = 6;
 			this->lSize->Text = L"Розмір";
+			this->lSize->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lName
 			// 
@@ -368,6 +412,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lName->Size = System::Drawing::Size(49, 16);
 			this->lName->TabIndex = 2;
 			this->lName->Text = L"Назва";
+			this->lName->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lFormat
 			// 
@@ -377,6 +422,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lFormat->Size = System::Drawing::Size(58, 16);
 			this->lFormat->TabIndex = 5;
 			this->lFormat->Text = L"Формат";
+			this->lFormat->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lAlbom
 			// 
@@ -386,6 +432,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lAlbom->Size = System::Drawing::Size(56, 16);
 			this->lAlbom->TabIndex = 3;
 			this->lAlbom->Text = L"Альбом";
+			this->lAlbom->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// lYear
 			// 
@@ -395,6 +442,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->lYear->Size = System::Drawing::Size(26, 16);
 			this->lYear->TabIndex = 4;
 			this->lYear->Text = L"Рік";
+			this->lYear->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 			// 
 			// tbMenu
 			// 
@@ -540,22 +588,79 @@ private: System::Windows::Forms::ToolStripMenuItem^ cmsAdd;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(120, 52);
+			this->cmsMenu->Size = System::Drawing::Size(186, 80);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsDelete
 			// 
 			this->cmsDelete->Name = L"cmsDelete";
-			this->cmsDelete->Size = System::Drawing::Size(119, 24);
+			this->cmsDelete->Size = System::Drawing::Size(185, 24);
 			this->cmsDelete->Text = L"Видалити";
 			this->cmsDelete->Click += gcnew System::EventHandler(this, &Kursova::cmsDelete_Click);
 			// 
 			// cmsAdd
 			// 
+			this->cmsAdd->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(7) {
+				this->cmstbSongers,
+					this->cmstbName, this->cmstbAlbom, this->cmstbYear, this->cmstbFormat, this->cmstbSize, this->cmstbIsImport
+			});
 			this->cmsAdd->Name = L"cmsAdd";
-			this->cmsAdd->Size = System::Drawing::Size(119, 24);
+			this->cmsAdd->Size = System::Drawing::Size(185, 24);
 			this->cmsAdd->Text = L"Додати";
+			this->cmsAdd->ToolTipText = L"Натиснікть коли дадасте всю наявну інормацію";
 			this->cmsAdd->Click += gcnew System::EventHandler(this, &Kursova::cmsAdd_Click);
+			// 
+			// cmstbSongers
+			// 
+			this->cmstbSongers->AutoToolTip = true;
+			this->cmstbSongers->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbSongers->Name = L"cmstbSongers";
+			this->cmstbSongers->Size = System::Drawing::Size(100, 27);
+			this->cmstbSongers->Tag = L"";
+			this->cmstbSongers->ToolTipText = L"Виконавець\\і";
+			// 
+			// cmstbName
+			// 
+			this->cmstbName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbName->Name = L"cmstbName";
+			this->cmstbName->Size = System::Drawing::Size(100, 27);
+			this->cmstbName->TextBoxTextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			this->cmstbName->ToolTipText = L"Назва";
+			// 
+			// cmstbAlbom
+			// 
+			this->cmstbAlbom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbAlbom->Name = L"cmstbAlbom";
+			this->cmstbAlbom->Size = System::Drawing::Size(100, 27);
+			this->cmstbAlbom->ToolTipText = L"Альбом";
+			// 
+			// cmstbYear
+			// 
+			this->cmstbYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbYear->Name = L"cmstbYear";
+			this->cmstbYear->Size = System::Drawing::Size(100, 27);
+			this->cmstbYear->ToolTipText = L"Рік";
+			// 
+			// cmstbFormat
+			// 
+			this->cmstbFormat->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbFormat->Name = L"cmstbFormat";
+			this->cmstbFormat->Size = System::Drawing::Size(100, 27);
+			this->cmstbFormat->ToolTipText = L"Формат";
+			// 
+			// cmstbSize
+			// 
+			this->cmstbSize->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbSize->Name = L"cmstbSize";
+			this->cmstbSize->Size = System::Drawing::Size(100, 27);
+			this->cmstbSize->ToolTipText = L"Розмір";
+			// 
+			// cmstbIsImport
+			// 
+			this->cmstbIsImport->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbIsImport->Name = L"cmstbIsImport";
+			this->cmstbIsImport->Size = System::Drawing::Size(100, 27);
+			this->cmstbIsImport->ToolTipText = L"Зарубіжна\? (Так\\Ні)";
 			// 
 			// Kursova
 			// 
@@ -591,166 +696,279 @@ private: System::Void tsmiSSize_Click(System::Object^ sender, System::EventArgs^
 private: System::Void tsmiSImport_Click(System::Object^ sender, System::EventArgs^ e);
 
 
-private: System::Void tlpTable_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Перевірка, чи подія відноситься до клікання мишкою
-	if (e->GetType() == System::Windows::Forms::MouseEventArgs::typeid) {
-		System::Windows::Forms::MouseEventArgs^ mouseEvent = (System::Windows::Forms::MouseEventArgs^)e;
+//private: System::Void tlpTable_Click(System::Object^ sender, System::EventArgs^ e) {
+//	// Перевірка, чи подія відноситься до клікання мишкою
+//	if (e->GetType() == System::Windows::Forms::MouseEventArgs::typeid) {
+//		System::Windows::Forms::MouseEventArgs^ mouseEvent = (System::Windows::Forms::MouseEventArgs^)e;
+//
+//		// Перевірка, чи клацнуто правою кнопкою миші
+//		if (mouseEvent->Button == System::Windows::Forms::MouseButtons::Right) {
+//			// Ваш код для відображення контекстного меню
+//			cmsMenu->Show(tlpTable, mouseEvent->Location);
+//		}
+//		else if (mouseEvent->Button == System::Windows::Forms::MouseButtons::Left) {
+//			// Змінення фону всіх лейблів на білий перед тим, як підсвічувати поточний рядок
+//			for (int i = 0; i < tlpTable->ColumnCount; i++) {
+//				for (int j = 0; j < tlpTable->RowCount; j++) {
+//					Control^ labelInTable = tlpTable->GetControlFromPosition(i, j);
+//					if (labelInTable != nullptr && labelInTable->GetType() == Label::typeid) {
+//						labelInTable->BackColor = System::Drawing::Color::White;
+//					}
+//				}
+//			}
+//
+//			// Визначення елемента, на якому було клікнуто
+//			Control^ clickedControl = tlpTable->GetChildAtPoint(tlpTable->PointToClient(mouseEvent->Location));
+//
+//			// Перевірка, чи це Label
+//			if (clickedControl != nullptr && clickedControl->GetType() == Label::typeid) {
+//				// Отримайте індекс рядка та стовпця
+//				int row = tlpTable->GetRow(clickedControl);
+//				int column = tlpTable->GetColumn(clickedControl);
+//
+//				// Змініть колір фону лейблу на синій
+//				clickedControl->BackColor = System::Drawing::Color::Blue;
+//
+//				// Змініть колір фону всіх лейблів у поточному рядку
+//				for (int i = 0; i < tlpTable->ColumnCount; i++) {
+//					Control^ labelInCurrentRow = tlpTable->GetControlFromPosition(i, row);
+//					if (labelInCurrentRow != nullptr && labelInCurrentRow->GetType() == Label::typeid) {
+//						labelInCurrentRow->BackColor = System::Drawing::Color::Blue;
+//					}
+//				}
+//
+//				// Ваш код для обробки кліку на Label у конкретному рядку та стовпці
+//				this->bSearch->Text = " " + (row + 1).ToString() + " ";
+//			}
+//		}
+//	}
+//}
 
-		// Перевірка, чи клацнуто правою кнопкою миші
-		if (mouseEvent->Button == System::Windows::Forms::MouseButtons::Right) {
-			// Ваш код для відображення контекстного меню
-			cmsMenu->Show(MousePosition);
-		}
-		else if (mouseEvent->Button == System::Windows::Forms::MouseButtons::Left) {
-			// Визначення індексу рядка та стовпця за допомогою HitTest
-			System::Windows::Forms::TableLayoutControlCollection^ controls = tlpTable->Controls;
 
-			for (int i = 0; i < controls->Count; i++) {
-				// Перевірте, чи курсор опинився на конкретному елементі TableLayoutPanel
-				if (controls[i]->Bounds.Contains(mouseEvent->Location)) {
-					// Змініть колір фону конкретного рядка
-					controls[i]->BackColor = System::Drawing::Color::Blue; // Змініть колір за потребою
-					break;
-				}
-			}
-		}
-	}
-}
+
+	 private: System::Void tlpTable_Click(System::Object^ sender, System::EventArgs^ e) {
+		 // Перевірка, чи подія відноситься до клікання мишкою
+		 if (e->GetType() == System::Windows::Forms::MouseEventArgs::typeid) {
+			 System::Windows::Forms::MouseEventArgs^ mouseEvent = (System::Windows::Forms::MouseEventArgs^)e;
+
+			 // Перевірка, чи клацнуто правою кнопкою миші
+			 if (mouseEvent->Button == System::Windows::Forms::MouseButtons::Right) {
+				 // Ваш код для відображення контекстного меню
+				 cmsMenu->Show(tlpTable, mouseEvent->Location);
+			 }
+		 }
+
+	 }
+
+
+
 
 
 private: System::Void cmsDelete_Click(System::Object^ sender, System::EventArgs^ e) {
-	MessageBox::Show("Delete");
+
+	System::Windows::Forms::MouseEventArgs^ mouseEvent = (System::Windows::Forms::MouseEventArgs^)e;
+
+	// Отримуємо індекс виділеного рядка
+	//int selectedIndex = tlpTable->GetRow(tlpTable->GetControlFromPosition(0, tlpTable->SelectedIndex));
+
+	// Видаляємо елемент із списку
+	//songManager->songList.removeAt(selectedIndex);
+
+	// Оновлюємо відображення списку пісень
+	UpdateTable();
 }
 
 
 
-private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Створіть нову форму (вікно)
-	Form^ newForm = gcnew Form();
-	newForm->Text = L"Нове вікно";
-
-	//заблокувати розміри вікна
-	newForm->MaximizeBox = false;
-	newForm->MinimizeBox = false;
-	newForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-
-	newForm->Width = 250;
-	newForm->Height = 325;
-	// Додайте лейбли і текстові поля для виконавця, назви, альбому, року, формату, розміру та зарубіжності
-	Label^ label1 = gcnew Label();
-	label1->Text = L"Виконавець:";
-	label1->Location = System::Drawing::Point(10, 30);
-	newForm->Controls->Add(label1);
-
-	TextBox^ textBox1 = gcnew TextBox();
-	textBox1->Location = System::Drawing::Point(125, 30);
-	newForm->Controls->Add(textBox1);
-
-	Label^ label2 = gcnew Label();
-	label2->Text = L"Назва:";
-	label2->Location = System::Drawing::Point(10, 60);
-	newForm->Controls->Add(label2);
-
-	TextBox^ textBox2 = gcnew TextBox();
-	textBox2->Location = System::Drawing::Point(125, 60);
-	newForm->Controls->Add(textBox2);
-
-	Label^ label3 = gcnew Label();
-	label3->Text = L"Альбом:";
-	label3->Location = System::Drawing::Point(10, 90);
-	newForm->Controls->Add(label3);
-
-	TextBox^ textBox3 = gcnew TextBox();
-	textBox3->Location = System::Drawing::Point(125, 90);
-	newForm->Controls->Add(textBox3);
-
-	Label^ label4 = gcnew Label();
-	label4->Text = L"Рік:";
-	label4->Location = System::Drawing::Point(10, 120);
-	newForm->Controls->Add(label4);
-
-	TextBox^ textBox4 = gcnew TextBox();
-	textBox4->Location = System::Drawing::Point(125, 120);
-	newForm->Controls->Add(textBox4);
-
-	Label^ label5 = gcnew Label();
-	label5->Text = L"Формат:";
-	label5->Location = System::Drawing::Point(10, 150);  
-	newForm->Controls->Add(label5);
-
-	TextBox^ textBox5 = gcnew TextBox();
-	textBox5->Location = System::Drawing::Point(125, 150);
-	newForm->Controls->Add(textBox5);
 
 
-	Label^ label6 = gcnew Label();
-	label6->Text = L"Розмір:";
-	label6->Location = System::Drawing::Point(10, 180);
-	newForm->Controls->Add(label6);
 
-	TextBox^ textBox6 = gcnew TextBox();
-	textBox6->Location = System::Drawing::Point(125, 180);
-	newForm->Controls->Add(textBox6);
-
-	// Додайте чекбокс
-	CheckBox^ newCheckBox = gcnew CheckBox();
-	newCheckBox->Text = L"Зарубіжна";
-	newCheckBox->Location = System::Drawing::Point(75, 210);
-	newForm->Controls->Add(newCheckBox);
-
-	// Створіть нову кнопку "Додати"
-	Button^ addButton = gcnew Button();
-	addButton->Text = L"Додати";
-	addButton->Location = System::Drawing::Point(25, 240);
-	addButton->Click += gcnew System::EventHandler(this, &Kursova::btnAdd_Click);
-	newForm->Controls->Add(addButton);
-
-	// Створіть нову кнопку "Скасувати"
-	Button^ cancelButton = gcnew Button();
-	cancelButton->Text = L"Скасувати";
-	cancelButton->Location = System::Drawing::Point(125, 240);
-	cancelButton->Click += gcnew System::EventHandler(this, &Kursova::btnCancel_Click);
-	newForm->Controls->Add(cancelButton);
-
-	// Покажіть нове вікно
-	newForm->Show();
-}
-
-
-	   // Метод, який викликається при натисканні кнопки "Додати"
-private: System::Void btnAdd_Click(System::Object^ sender, System::EventArgs^ e) {
-	// Retrieve information from TextBoxes and CheckBox
-	String^ artist = textBox1->Text;  // Replace textBox1 with the actual TextBox for artist
-	String^ name = textBox2->Text;    // Replace textBox2 with the actual TextBox for name
-	String^ album = textBox3->Text;   // Replace textBox3 with the actual TextBox for album
-	int year = Int32::Parse(textBox4->Text);  // Replace textBox4 with the actual TextBox for year
-	String^ format = textBox5->Text;  // Replace textBox5 with the actual TextBox for format
-	int size = Int32::Parse(textBox6->Text);  // Replace textBox6 with the actual TextBox for size
-	bool isImport = checkBox1->Checked;  // Replace checkBox1 with the actual CheckBox
-
-	// Create a Song object with the retrieved information
-	Song^ newSong = gcnew Song();
-	newSong->setSongers({ msclr::interop::marshal_as<std::string>(artist) });
-	newSong->setName(msclr::interop::marshal_as<std::string>(name));
-	newSong->setAlbom(msclr::interop::marshal_as<std::string>(album));
-	newSong->setYear(year);
-	newSong->setFormat(msclr::interop::marshal_as<std::string>(format));
-	newSong->setSize(size);
-	newSong->setIsImport(isImport);
-
-	// Now you can use the 'newSong' object as needed, for example, add it to your SongManager or perform other operations.
-}
-
-	   // Метод, який викликається при натисканні кнопки "Скасувати"
-private: System::Void btnCancel_Click(System::Object^ sender, System::EventArgs^ e) {
-	this->Close(); // Закрити поточну форму
-}
-
+//private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
+//	// Створіть нову форму (вікно)
+//	Form^ newForm = gcnew Form();
+//	newForm->Text = L"Нове вікно";
+//
+//	//заблокувати розміри вікна
+//	newForm->MaximizeBox = false;
+//	newForm->MinimizeBox = false;
+//	newForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
+//
+//	newForm->Width = 250;
+//	newForm->Height = 325;
+//	// Додайте лейбли і текстові поля для виконавця, назви, альбому, року, формату, розміру та зарубіжності
+//	Label^ label1 = gcnew Label();
+//	label1->Text = L"Виконавець:";
+//	label1->Location = System::Drawing::Point(10, 30);
+//	newForm->Controls->Add(label1);
+//
+//	TextBox^ textBox1 = gcnew TextBox();
+//	textBox1->Location = System::Drawing::Point(125, 30);
+//	newForm->Controls->Add(textBox1);
+//
+//	Label^ label2 = gcnew Label();
+//	label2->Text = L"Назва:";
+//	label2->Location = System::Drawing::Point(10, 60);
+//	newForm->Controls->Add(label2);
+//
+//	TextBox^ textBox2 = gcnew TextBox();
+//	textBox2->Location = System::Drawing::Point(125, 60);
+//	newForm->Controls->Add(textBox2);
+//
+//	Label^ label3 = gcnew Label();
+//	label3->Text = L"Альбом:";
+//	label3->Location = System::Drawing::Point(10, 90);
+//	newForm->Controls->Add(label3);
+//
+//	TextBox^ textBox3 = gcnew TextBox();
+//	textBox3->Location = System::Drawing::Point(125, 90);
+//	newForm->Controls->Add(textBox3);
+//
+//	Label^ label4 = gcnew Label();
+//	label4->Text = L"Рік:";
+//	label4->Location = System::Drawing::Point(10, 120);
+//	newForm->Controls->Add(label4);
+//
+//	TextBox^ textBox4 = gcnew TextBox();
+//	textBox4->Location = System::Drawing::Point(125, 120);
+//	newForm->Controls->Add(textBox4);
+//
+//	Label^ label5 = gcnew Label();
+//	label5->Text = L"Формат:";
+//	label5->Location = System::Drawing::Point(10, 150);  
+//	newForm->Controls->Add(label5);
+//
+//	TextBox^ textBox5 = gcnew TextBox();
+//	textBox5->Location = System::Drawing::Point(125, 150);
+//	newForm->Controls->Add(textBox5);
+//
+//
+//	Label^ label6 = gcnew Label();
+//	label6->Text = L"Розмір:";
+//	label6->Location = System::Drawing::Point(10, 180);
+//	newForm->Controls->Add(label6);
+//
+//	TextBox^ textBox6 = gcnew TextBox();
+//	textBox6->Location = System::Drawing::Point(125, 180);
+//	newForm->Controls->Add(textBox6);
+//
+//	// Додайте чекбокс
+//	CheckBox^ newCheckBox = gcnew CheckBox();
+//	newCheckBox->Text = L"Зарубіжна";
+//	newCheckBox->Location = System::Drawing::Point(75, 210);
+//	newForm->Controls->Add(newCheckBox);
+//
+//	// Створіть нову кнопку "Додати"
+//	Button^ addButton = gcnew Button();
+//	addButton->Text = L"Додати";
+//	addButton->Location = System::Drawing::Point(25, 240);
+//	addButton->Click += gcnew System::EventHandler(this, &Kursova::btnAdd_Click);
+//	newForm->Controls->Add(addButton);
+//
+//	// Створіть нову кнопку "Скасувати"
+//	Button^ cancelButton = gcnew Button();
+//	cancelButton->Text = L"Скасувати";
+//	cancelButton->Location = System::Drawing::Point(125, 240);
+//	cancelButton->Click += gcnew System::EventHandler(this, &Kursova::btnCancel_Click);
+//	newForm->Controls->Add(cancelButton);
+//
+//	// Покажіть нове вікно
+//	newForm->Show();
+//}
+//
 
 private: System::Void tlpTable_PreviewKeyDown(System::Object^ sender, System::Windows::Forms::PreviewKeyDownEventArgs^ e) {
 	if (e->KeyCode == Keys::Enter) {
 		MessageBox::Show("Enter");
 	}
 }
+private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
+	Song* song = new Song();
+
+	// Дані про виконавців
+	if (!String::IsNullOrEmpty(cmstbSongers->Text))
+	{
+		std::vector<std::string> songers;
+		// Виконавці розділені комою
+		std::string songersString = msclr::interop::marshal_as<std::string>(cmstbSongers->Text);
+		std::string delimiter = ",";
+		size_t pos = 0;
+		std::string token;
+		while ((pos = songersString.find(delimiter)) != std::string::npos) {
+			token = songersString.substr(0, pos);
+			songers.push_back(token);
+			songersString.erase(0, pos + delimiter.length());
+		}
+		// Додаємо залишок рядка після останньої коми (або весь рядок, якщо ком не знайдено)
+		songers.push_back(songersString);
+		song->setSongers(songers);
+	}
+
+	// Дані про назву
+	if (!String::IsNullOrEmpty(cmstbName->Text))
+	{
+		std::string name = msclr::interop::marshal_as<std::string>(cmstbName->Text);
+		song->setName(name);
+	}
+
+	// Дані про альбом
+	if (!String::IsNullOrEmpty(cmstbAlbom->Text))
+	{
+		std::string albom = msclr::interop::marshal_as<std::string>(cmstbAlbom->Text);
+		song->setAlbom(albom);
+	}
+
+	// Дані про рік
+	if (!String::IsNullOrEmpty(cmstbYear->Text))
+	{
+		int year;
+		if (Int32::TryParse(cmstbYear->Text, year)) {
+			song->setYear(year);
+		}
+		else {
+			// Обробка помилки, наприклад, виведення повідомлення користувачу або інше необхідне дійство
+			// Наприклад, MessageBox::Show("Введіть правильний рік");
+			return;
+		}
+	}
+
+	// Дані про формат
+	if (!String::IsNullOrEmpty(cmstbFormat->Text))
+	{
+		std::string format = msclr::interop::marshal_as<std::string>(cmstbFormat->Text);
+		song->setFormat(format);
+	}
+
+	// Дані про розмір
+	if (!String::IsNullOrEmpty(cmstbSize->Text))
+	{
+		int size;
+		if (Int32::TryParse(cmstbSize->Text, size)) {
+			song->setSize(size);
+		}
+		else {
+			// Обробка помилки, наприклад, виведення повідомлення користувачу або інше необхідне дійство
+			// Наприклад, MessageBox::Show("Введіть правильний розмір");
+			return;
+		}
+	}
+
+	// Дані про зарубіжність
+	if (!String::IsNullOrEmpty(cmstbIsImport->Text))
+	{
+		std::wstring isImport = msclr::interop::marshal_as<std::wstring>(cmstbIsImport->Text);
+		if (isImport == L"Так") {
+			song->setIsImport(true);
+		}
+		else
+		{
+			song->setIsImport(false);
+		}
+	}
+
+	songManager->songList.push_front(*song);
+	UpdateTable();
+}
+
+
 };
 }
