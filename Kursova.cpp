@@ -39,15 +39,15 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	else
 	{
 		//in >> (*songManager);
-        in.close();
+		in.close();
 	}
     
-	UpdateTable();
+	UpdateTable(songManager->songList);
 
 	return System::Void();
 }
 
-System::Void KursovaOOP::Kursova::UpdateTable()
+System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song> DList)
 {
     // Очистити TableLayoutPanel
     tlpTable->Controls->Clear();
@@ -131,49 +131,49 @@ System::Void KursovaOOP::Kursova::UpdateTable()
 System::Void KursovaOOP::Kursova::tsmiSSonger_Click(System::Object^ sender, System::EventArgs^ e)
 {
    // songManager->sort(CompareSongers);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSName_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareName);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSAlbom_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareAlbom);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSYear_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareYear);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSFormat_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareFormat);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSSize_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareSize);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSImport_Click(System::Object^ sender, System::EventArgs^ e)
 {
     //songManager->sort(CompareIsImport);
-    UpdateTable();
+    UpdateTable(songManager->songList);
     return System::Void();
 }
 
@@ -211,14 +211,14 @@ System::Void KursovaOOP::Kursova::cmsDelete_Click(System::Object^ sender, System
 	}
 
 	// Перевірка на допустимий діапазон індексів
-	if (deleteIndex < 0 || deleteIndex >= songManager->songList.getSize()) {
+	if (deleteIndex-1 < 0 || deleteIndex-1 >= songManager->songList.getSize()) {
 		MessageBox::Show("Index out of range. Please enter a valid index.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
 	// Видалення пісні та оновлення таблиці
-	songManager->songList.removeAt(deleteIndex + 1);
-	UpdateTable();
+	songManager->songList.removeAt(deleteIndex - 1);
+	UpdateTable(songManager->songList);
 	return System::Void();
 }
 
@@ -317,8 +317,19 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	}
 
 	songManager->songList.push_front(*song);
-	UpdateTable();
+	UpdateTable(songManager->songList);
     return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	if (tbSearch->Text != "") {
+
+	}
+	else {
+		UpdateTable(songManager->songList);
+	}
+	return System::Void();
 }
 
 //private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
