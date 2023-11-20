@@ -34,6 +34,52 @@ void SongManager::sort(int (Compare)(const Song& A, const Song& B))
 }
 
 
+void SongManager::search(const std::string& str)
+{
+    // Очистіть список результатів пошуку перед кожним пошуком
+    tempList.clear();
+
+    // Перебір всіх пісень і додавання збігів до списку результатів
+    for (int i = 0; i < songList.getSize(); i++) {
+        const Song& song = songList[i];
+
+        // Переведіть рядки у нижній регістр для регістронезалежного пошуку
+        std::string lowerCaseName = song.getName();
+        std::transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
+
+        std::string lowerCaseAlbom = song.getAlbom();
+        std::transform(lowerCaseAlbom.begin(), lowerCaseAlbom.end(), lowerCaseAlbom.begin(), ::tolower);
+
+        std::string lowerCaseSonger = song.getSongers()[0]; // Виберіть першого виконавця для прикладу
+        std::transform(lowerCaseSonger.begin(), lowerCaseSonger.end(), lowerCaseSonger.begin(), ::tolower);
+
+        std::string lowerCaseFormat = song.getFormat();
+        std::transform(lowerCaseFormat.begin(), lowerCaseFormat.end(), lowerCaseFormat.begin(), ::tolower);
+
+        // Конвертуйте рік та розмір в рядки для порівняння
+        std::string yearString = std::to_string(song.getYear());
+        std::string sizeString = std::to_string(song.getSize());
+
+        // Переведіть str у нижній регістр для регістронезалежного порівняння
+        std::string lowerCaseStr = str;
+        std::transform(lowerCaseStr.begin(), lowerCaseStr.end(), lowerCaseStr.begin(), ::tolower);
+
+        // Перевірка входження str у різні поля пісні
+        if (lowerCaseName.find(lowerCaseStr) != std::string::npos ||
+            lowerCaseAlbom.find(lowerCaseStr) != std::string::npos ||
+            lowerCaseSonger.find(lowerCaseStr) != std::string::npos ||
+            lowerCaseFormat.find(lowerCaseStr) != std::string::npos ||
+            yearString.find(lowerCaseStr) != std::string::npos ||
+            sizeString.find(lowerCaseStr) != std::string::npos ||
+            (lowerCaseStr == "yes" && song.getIsImport()) ||
+            (lowerCaseStr == "not" && !song.getIsImport())) {
+            // Знайдено збіг, додайте пісню до списку результатів пошуку
+            tempList.push_back(song);
+        }
+    }
+
+}
+
 
 std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager)
 {

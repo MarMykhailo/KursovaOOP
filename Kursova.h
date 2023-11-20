@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "SongManager.h"
 #include <msclr\marshal_cppstd.h>
+#include <msclr/marshal.h>
 #include <Windows.h> // Додайте це для використання SetWindowRgn
 
 namespace KursovaOOP {
@@ -696,7 +697,7 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbDelete;
 #pragma endregion
 private: System::Void msbFileOut_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void msbFileIn_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void UpdateTable(Dlist<Song> DList);
+private: System::Void UpdateTable(Dlist<Song>& DList);
 private: System::Void tsmiSSonger_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiSName_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiSAlbom_Click(System::Object^ sender, System::EventArgs^ e);

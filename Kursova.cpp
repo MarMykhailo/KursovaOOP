@@ -47,7 +47,7 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	return System::Void();
 }
 
-System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song> DList)
+System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
 {
     // Очистити TableLayoutPanel
     tlpTable->Controls->Clear();
@@ -63,8 +63,8 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song> DList)
     tlpTable->Controls->Add(lIsImport, 7, 0);
 
     // Додати дані про пісні
-    for (int i = 0; i < songManager->songList.getSize(); i++) {
-        auto currentSong = songManager->songList[i];
+    for (int i = 0; i < DList.getSize(); i++) {
+        auto currentSong = DList[i];
 
         Label^ numberLabel = gcnew Label();
         numberLabel->Text = (i + 1).ToString();
@@ -323,14 +323,24 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 
 System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	if (tbSearch->Text != "") {
+	if (!String::IsNullOrEmpty(tbSearch->Text))
+	{
+		// Отримуємо рядок з TextBox
+		String^ searchString = tbSearch->Text;
 
+		// Перетворюємо в стандартний рядок C++
+		std::string str = msclr::interop::marshal_as<std::string>(searchString);
+
+		// Викликаємо функцію search з отриманим рядком
+		songManager->search(str);
+
+		// Оновлюємо таблицю з використанням тимчасового списку
+		UpdateTable(songManager->tempList);
 	}
-	else {
-		UpdateTable(songManager->songList);
-	}
+
 	return System::Void();
 }
+
 
 //private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
 //	// Створіть нову форму (вікно)

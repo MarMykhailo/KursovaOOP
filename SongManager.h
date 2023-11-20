@@ -2,6 +2,8 @@
 #include "Song.h"
 #include "Dlist.h"
 #include "QuickSort.h"
+#include <algorithm>  // для std::transform
+#include <cctype>      // для std::tolower
 
 
 class SongManager
@@ -19,6 +21,7 @@ public:
 	//std::vector<std::string> printEl(int index);
 
 	void sort(int (Compare)(const Song& A, const Song& B));
+	void search(const std::string& str);
 
 	friend std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
 	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
