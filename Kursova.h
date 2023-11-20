@@ -182,6 +182,7 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbSize;
 
 private: System::Windows::Forms::ToolTip^ ttTip;
 private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
+private: System::Windows::Forms::ToolStripTextBox^ cmstbDelete;
 
 
 
@@ -282,6 +283,7 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
 			this->cmstbSize = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->cmstbIsImport = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->ttTip = (gcnew System::Windows::Forms::ToolTip(this->components));
+			this->cmstbDelete = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->gbMenu->SuspendLayout();
 			this->gbIterface->SuspendLayout();
 			this->tlpTable->SuspendLayout();
@@ -593,6 +595,7 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
 			// 
 			// cmsDelete
 			// 
+			this->cmsDelete->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmstbDelete });
 			this->cmsDelete->Name = L"cmsDelete";
 			this->cmsDelete->Size = System::Drawing::Size(185, 24);
 			this->cmsDelete->Text = L"Видалити";
@@ -624,7 +627,6 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
 			this->cmstbName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbName->Name = L"cmstbName";
 			this->cmstbName->Size = System::Drawing::Size(100, 27);
-			this->cmstbName->TextBoxTextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->cmstbName->ToolTipText = L"Назва";
 			// 
 			// cmstbAlbom
@@ -661,6 +663,13 @@ private: System::Windows::Forms::ToolStripTextBox^ cmstbIsImport;
 			this->cmstbIsImport->Name = L"cmstbIsImport";
 			this->cmstbIsImport->Size = System::Drawing::Size(100, 27);
 			this->cmstbIsImport->ToolTipText = L"Зарубіжна\? (Так\\Ні)";
+			// 
+			// cmstbDelete
+			// 
+			this->cmstbDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->cmstbDelete->Name = L"cmstbDelete";
+			this->cmstbDelete->Size = System::Drawing::Size(100, 27);
+			this->cmstbDelete->ToolTipText = L"Індекс елемента який треба видалити";
 			// 
 			// Kursova
 			// 
@@ -763,20 +772,58 @@ private: System::Void tsmiSImport_Click(System::Object^ sender, System::EventArg
 
 
 
-
 private: System::Void cmsDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+	// Беремо текст з текстового поля
+	String^ deleteIndexText = cmstbDelete->Text;
 
-	System::Windows::Forms::MouseEventArgs^ mouseEvent = (System::Windows::Forms::MouseEventArgs^)e;
+	// Перевірка на пустий рядок
+	if (String::IsNullOrEmpty(deleteIndexText)) {
+		MessageBox::Show("Please enter an index to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 
-	// Отримуємо індекс виділеного рядка
-	//int selectedIndex = tlpTable->GetRow(tlpTable->GetControlFromPosition(0, tlpTable->SelectedIndex));
+	// Перевірка на коректний формат числа
+	int deleteIndex;
+	if (!Int32::TryParse(deleteIndexText, deleteIndex)) {
+		MessageBox::Show("Invalid index. Please enter a valid integer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 
-	// Видаляємо елемент із списку
-	//songManager->songList.removeAt(selectedIndex);
+	// Перевірка на допустимий діапазон індексів
+	if (deleteIndex < 0 || deleteIndex >= songManager->songList.getSize()) {
+		MessageBox::Show("Index out of range. Please enter a valid index.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		return;
+	}
 
-	// Оновлюємо відображення списку пісень
+	// Видалення пісні та оновлення таблиці
+	songManager->songList.removeAt(deleteIndex+1);
 	UpdateTable();
 }
+
+//private: System::Void cmsDelete_Click(System::Object^ sender, System::EventArgs^ e) {
+//	// Отримуємо елемент, на якому було клікнуто
+//	Control^ clickedControl = tlpTable->GetChildAtPoint(tlpTable->PointToClient(Cursor->Position));
+//
+//	// Перевірка, чи це Label
+//	Label^ clickedLabel = dynamic_cast<Label^>(clickedControl);
+//
+//	// Видаліть елемент (Label) з TableLayoutPanel
+//	if (clickedLabel != nullptr) {
+//		// Отримайте індекс рядка
+//		int row = tlpTable->GetRow(clickedLabel);
+//		MessageBox::Show("DELETE");
+//
+//
+//		songManager->songList.removeAt(row);
+//
+//		// Оновіть відображення списку пісень
+//		UpdateTable();
+//	}
+//}
+
+
+
+
 
 
 
