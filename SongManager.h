@@ -11,7 +11,8 @@ class SongManager
 public:
 
 	Dlist<Song> songList;
-	Dlist<Song> tempList;
+	Dlist<Song> tempList1;
+	Dlist<Song> tempList2;
 
 	/*
 	пошук певних елементів
@@ -21,8 +22,7 @@ public:
 	//std::vector<std::string> printEl(int index);
 
 	void sort(int (Compare)(const Song& A, const Song& B));
-	void search(const std::string& str);
-
+	void search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& str, int field);
 	friend std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
 	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
 
@@ -30,4 +30,3 @@ public:
 
 std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
 std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
-

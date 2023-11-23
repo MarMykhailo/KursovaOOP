@@ -34,50 +34,71 @@ void SongManager::sort(int (Compare)(const Song& A, const Song& B))
 }
 
 
-void SongManager::search(const std::string& str)
+void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& str, int field)
 {
     // Очистіть список результатів пошуку перед кожним пошуком
-    tempList.clear();
+    inList.clear();
 
     // Перебір всіх пісень і додавання збігів до списку результатів
-    for (int i = 0; i < songList.getSize(); i++) {
-        const Song& song = songList[i];
+    for (int i = 0; i < fromList.getSize(); i++) {
+        // Перевірка, чи індекс не перевищує розмір fromList
+        if (i >= fromList.getSize()) {
+            break;
+        }
 
-        // Переведіть рядки у нижній регістр для регістронезалежного пошуку
-        std::string lowerCaseName = song.getName();
-        std::transform(lowerCaseName.begin(), lowerCaseName.end(), lowerCaseName.begin(), ::tolower);
+        const Song& song = fromList[i];
 
-        std::string lowerCaseAlbom = song.getAlbom();
-        std::transform(lowerCaseAlbom.begin(), lowerCaseAlbom.end(), lowerCaseAlbom.begin(), ::tolower);
+        // Вибір полів для пошуку відповідно до значення field
+        std::vector<std::string> fieldValues;
+        switch (field) {
+        case 0: fieldValues.push_back(song.getSongers()[0]); break; // Виконавець
+        case 1: fieldValues.push_back(song.getName()); break; // Назва
+        case 2: fieldValues.push_back(song.getAlbom()); break; // Альбом
+        case 3: fieldValues.push_back(std::to_string(song.getYear())); break; // Рік
+        case 4: fieldValues.push_back(song.getFormat()); break; // Формат
+        case 5: fieldValues.push_back(std::to_string(song.getSize())); break; // Розмір
+        case 6: fieldValues.push_back(song.getIsImport() ? "yes" : "not"); break; // Зарубіжна
+        default: // Пошук за всіма полями
+            fieldValues.push_back(song.getSongers()[0]);
+            fieldValues.push_back(song.getName());
+            fieldValues.push_back(song.getAlbom());
+            fieldValues.push_back(std::to_string(song.getYear()));
+            fieldValues.push_back(song.getFormat());
+            fieldValues.push_back(std::to_string(song.getSize()));
+            fieldValues.push_back(song.getIsImport() ? "yes" : "not");
+            break;
+        }
 
-        std::string lowerCaseSonger = song.getSongers()[0]; // Виберіть першого виконавця для прикладу
-        std::transform(lowerCaseSonger.begin(), lowerCaseSonger.end(), lowerCaseSonger.begin(), ::tolower);
+        // Перевірка входження str у вибрані поля пісні
+        bool found = false;
+        if (str.size() == 7) {
+            found = true;
 
-        std::string lowerCaseFormat = song.getFormat();
-        std::transform(lowerCaseFormat.begin(), lowerCaseFormat.end(), lowerCaseFormat.begin(), ::tolower);
+            // Перевіряємо відповідні поля
+            for (int j = 0; j < 7; j++) {
+                std::string lowerCaseField = fieldValues[j];
+                std::transform(lowerCaseField.begin(), lowerCaseField.end(), lowerCaseField.begin(), ::tolower);
 
-        // Конвертуйте рік та розмір в рядки для порівняння
-        std::string yearString = std::to_string(song.getYear());
-        std::string sizeString = std::to_string(song.getSize());
+                std::string lowerCaseStr = str[j];
+                std::transform(lowerCaseStr.begin(), lowerCaseStr.end(), lowerCaseStr.begin(), ::tolower);
 
-        // Переведіть str у нижній регістр для регістронезалежного порівняння
-        std::string lowerCaseStr = str;
-        std::transform(lowerCaseStr.begin(), lowerCaseStr.end(), lowerCaseStr.begin(), ::tolower);
+                if (lowerCaseField.find(lowerCaseStr) == std::string::npos) {
+                    found = false;
+                    break;  // Якщо хоча б одне поле не співпадає, виходимо з циклу
+                }
+            }
+        }
 
-        // Перевірка входження str у різні поля пісні
-        if (lowerCaseName.find(lowerCaseStr) != std::string::npos ||
-            lowerCaseAlbom.find(lowerCaseStr) != std::string::npos ||
-            lowerCaseSonger.find(lowerCaseStr) != std::string::npos ||
-            lowerCaseFormat.find(lowerCaseStr) != std::string::npos ||
-            yearString.find(lowerCaseStr) != std::string::npos ||
-            sizeString.find(lowerCaseStr) != std::string::npos ||
-            (lowerCaseStr == "yes" && song.getIsImport()) ||
-            (lowerCaseStr == "not" && !song.getIsImport())) {
+        if (found) {
             // Знайдено збіг, додайте пісню до списку результатів пошуку
-            tempList.push_back(song);
+            inList.push_back(song);
         }
     }
 
+    // Якщо tempList пустий, беремо елементи з songList
+    if (inList.getSize() == 0) {
+        inList = fromList;
+    }
 }
 
 

@@ -321,6 +321,7 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
     return System::Void();
 }
 
+
 System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (!String::IsNullOrEmpty(tbSearch->Text))
@@ -330,16 +331,36 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 
 		// Перетворюємо в стандартний рядок C++
 		std::string str = msclr::interop::marshal_as<std::string>(searchString);
-
+		std::vector <std::string> Info;
 		// Викликаємо функцію search з отриманим рядком
-		songManager->search(str);
-
+		songManager->search(songManager->songList, songManager->tempList1,Info,10);
+		//songManager->search(songManager->songList, songManager->tempList1, Info, 0);
 		// Оновлюємо таблицю з використанням тимчасового списку
-		UpdateTable(songManager->tempList);
+		UpdateTable(songManager->tempList1);
 	}
 
 	return System::Void();
 }
+
+System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Dlist<Song>* tempList1 = new Dlist<Song>();
+	Dlist<Song>* tempList2 = new Dlist<Song>();
+	std::string Songers = msclr::interop::marshal_as<std::string>(tstbSongers->Text);
+	std::string Albom = msclr::interop::marshal_as<std::string>(tstbAlbom->Text);
+	std::string Year = msclr::interop::marshal_as<std::string>(tstbYear->Text);
+	std::string Format = msclr::interop::marshal_as<std::string>(tstbFormat->Text);
+	std::string Size = msclr::interop::marshal_as<std::string>(tstbSize->Text);
+	std::string IsImport = msclr::interop::marshal_as<std::string>(tstbIsImport->Text);
+
+	std::vector<std::string> Info;
+	//songManager->search(songManager->tempList1, songManager->tempList2, Info, 0);
+
+
+	return System::Void();
+}
+
+
 
 
 //private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e) {
