@@ -334,7 +334,6 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 		std::vector <std::string> Info;
 		// Викликаємо функцію search з отриманим рядком
 		songManager->search(songManager->songList, songManager->tempList1,Info,10);
-		//songManager->search(songManager->songList, songManager->tempList1, Info, 0);
 		// Оновлюємо таблицю з використанням тимчасового списку
 		UpdateTable(songManager->tempList1);
 	}
@@ -346,16 +345,17 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 {
 	Dlist<Song>* tempList1 = new Dlist<Song>();
 	Dlist<Song>* tempList2 = new Dlist<Song>();
-	std::string Songers = msclr::interop::marshal_as<std::string>(tstbSongers->Text);
-	std::string Albom = msclr::interop::marshal_as<std::string>(tstbAlbom->Text);
-	std::string Year = msclr::interop::marshal_as<std::string>(tstbYear->Text);
-	std::string Format = msclr::interop::marshal_as<std::string>(tstbFormat->Text);
-	std::string Size = msclr::interop::marshal_as<std::string>(tstbSize->Text);
-	std::string IsImport = msclr::interop::marshal_as<std::string>(tstbIsImport->Text);
-
 	std::vector<std::string> Info;
-	//songManager->search(songManager->tempList1, songManager->tempList2, Info, 0);
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSongers->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbName->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbAlbom->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbYear->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbFormat->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSize->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbIsImport->Text));
 
+	songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
+	UpdateTable(songManager->tempList1);
 
 	return System::Void();
 }

@@ -23,6 +23,7 @@ public:
 
 	void sort(int (Compare)(const Song& A, const Song& B));
 	void search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& str, int field);
+	void searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& searchValues);
 	friend std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
 	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
 
