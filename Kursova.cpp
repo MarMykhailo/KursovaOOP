@@ -130,14 +130,14 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
 
 System::Void KursovaOOP::Kursova::tsmiSSonger_Click(System::Object^ sender, System::EventArgs^ e)
 {
-   // songManager->sort(CompareSongers);
+	//songManager->sort(CompareSongers);
     UpdateTable(songManager->songList);
     return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSName_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    //songManager->sort(CompareName);
+	songManager->sort(CompareName,songManager->songList);
     UpdateTable(songManager->songList);
     return System::Void();
 }
@@ -321,7 +321,6 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
     return System::Void();
 }
 
-
 System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	if (!String::IsNullOrEmpty(tbSearch->Text))
@@ -329,12 +328,11 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 		// Отримуємо рядок з TextBox
 		String^ searchString = tbSearch->Text;
 
-		// Перетворюємо в стандартний рядок C++
 		std::string str = msclr::interop::marshal_as<std::string>(searchString);
 		std::vector <std::string> Info;
-		// Викликаємо функцію search з отриманим рядком
-		songManager->search(songManager->songList, songManager->tempList1,Info,10);
-		// Оновлюємо таблицю з використанням тимчасового списку
+
+		//songManager->search(songManager->songList, songManager->tempList1,Info,10);
+		
 		UpdateTable(songManager->tempList1);
 	}
 
@@ -354,9 +352,14 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSize->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbIsImport->Text));
 
-	songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
+	//songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
 	UpdateTable(songManager->tempList1);
 
+	return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::tsmiSNumber_Click(System::Object^ sender, System::EventArgs^ e)
+{
 	return System::Void();
 }
 

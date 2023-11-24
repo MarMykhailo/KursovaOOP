@@ -1,20 +1,37 @@
-//#include "Compare.h"
-//int CompareSongers(const Song& A, const Song& B)
-//{
-//	if (A.getSongers() == B.getSongers())
-//	{
-//		return 1;
-//	}
-//	else if (A.getSongers() > B.getSongers())
-//	{
-//		return 0;
-//	}
-//	else
-//	{
-//		return 2;
-//	}
-//}
-//
+﻿#include "Compare.h"
+int CompareSongers(const Song& A, const Song& B)
+{
+	if (A.getSongers() == B.getSongers())
+	{
+		return 1;
+	}
+	else if (A.getSongers() > B.getSongers())
+	{
+		return 0;
+	}
+	else
+	{
+		return 2;
+	}
+}
+
+int CompareName(const Song& A, const Song& B)
+{
+	if (A.getName() > B.getName())
+	{
+		return -1; // A перед B
+	}
+	else if (A.getName() < B.getName())
+	{
+		return 1; // A після B
+	}
+	else
+	{
+		return 0; // рядки однакові
+	}
+}
+
+
 //int CompareName(const Song& A, const Song& B)
 //{
 //	if (A.getName() == B.getName())

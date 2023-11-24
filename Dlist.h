@@ -15,14 +15,13 @@ private:
 
 
     int size;
-
 public:
     Node* head;
     Node* tail;
 
     Dlist() : head(nullptr), tail(nullptr), size(0) {}
 
-    int getSize()  {
+    int getSize() {
         return size;
     }
 
@@ -49,6 +48,9 @@ public:
         }
         head = new_node;
         size++;
+        if (tail == nullptr) {
+            tail = head; // Якщо список був порожній, tail тепер вказує на новий елемент
+        }
         head->prev = nullptr;
     }
 
@@ -74,16 +76,17 @@ public:
         return current->data;
     }
 
+
     Node& at(int index) {
         if (index < 0 || index >= size) {
-			throw std::out_of_range("Index out of range");
-		}
-		Node* current = head;
+            throw std::out_of_range("Index out of range");
+        }
+        Node* current = head;
         for (int i = 0; i < index; i++) {
-			current = current->next;
-		}
-		return *current;
-	}
+            current = current->next;
+        }
+        return *current;
+    }
 
 
     int find(const T& value) const {
@@ -99,29 +102,70 @@ public:
         return -1; // елемент не знайдено
     }
 
-
     void swap(int A, int B) {
-        Node& tempA = at(A);
-        Node& tempB = at(B);
+        if (!head || !tail || A < 0 || B < 0 || A >= size || B >= size || A == B) {
+            return;
+        }
 
-        Node* tempNext = tempA.next;
-        Node* tempPrev = tempA.prev;
+        Node* nodeA = &at(A);
+        Node* nodeB = &at(B);
 
-        tempA.next = tempB.next;
-        tempA.prev = tempB.prev;
+        // Оновлюємо вказівники next для сусідів
+        if (std::abs(A - B) == 1) {
+            // Сусідні елементи
+            std::swap(nodeA->next, nodeB->next);
+            std::swap(nodeA->prev, nodeB->prev);
+        }
+        else {
+            // Не сусідні елементи
+            // Оновлюємо вказівники next для сусідів
+            if (nodeA->next) {
+                nodeA->next->prev = nodeB;
+            }
+            if (nodeB->next) {
+                nodeB->next->prev = nodeA;
+            }
 
-        tempB.next = tempNext;
-        tempB.prev = tempPrev;
+            // Оновлюємо вказівники prev для сусідів
+            if (nodeA->prev) {
+                nodeA->prev->next = nodeB;
+            }
+            if (nodeB->prev) {
+                nodeB->prev->next = nodeA;
+            }
+
+            // Оновлюємо вказівники для елементів, які обмінюються
+            std::swap(nodeA->next, nodeB->next);
+            std::swap(nodeA->prev, nodeB->prev);
+        }
+
+        // Оновлюємо head і tail, якщо необхідно
+        if (head == nodeA) {
+            head = nodeB;
+        }
+        else if (head == nodeB) {
+            head = nodeA;
+        }
+
+        if (tail == nodeA) {
+            tail = nodeB;
+        }
+        else if (tail == nodeB) {
+            tail = nodeA;
+        }
     }
 
+
+
+
+
     void removeAt(int index) {
-        if (index < 0 || index >= size) {
-            throw std::out_of_range("Index out of range");
+        if (head == nullptr || tail == nullptr) {
+            throw std::out_of_range("List is empty");
         }
 
         Node* nodeToRemove = &at(index);
 
-        // Видаляємо елемент з двобічної черги
         if (nodeToRemove->prev) {
             nodeToRemove->prev->next = nodeToRemove->next;
         }
@@ -139,6 +183,7 @@ public:
         delete nodeToRemove;
         size--;
     }
+
 
     void clear() {
         Node* current = head;

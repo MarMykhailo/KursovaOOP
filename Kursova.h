@@ -572,55 +572,56 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// tsmiSNumber
 			// 
 			this->tsmiSNumber->Name = L"tsmiSNumber";
-			this->tsmiSNumber->Size = System::Drawing::Size(186, 26);
+			this->tsmiSNumber->Size = System::Drawing::Size(224, 26);
 			this->tsmiSNumber->Text = L"№";
+			this->tsmiSNumber->Click += gcnew System::EventHandler(this, &Kursova::tsmiSNumber_Click);
 			// 
 			// tsmiSSonger
 			// 
 			this->tsmiSSonger->Name = L"tsmiSSonger";
-			this->tsmiSSonger->Size = System::Drawing::Size(186, 26);
+			this->tsmiSSonger->Size = System::Drawing::Size(224, 26);
 			this->tsmiSSonger->Text = L"Виконавець\\і";
 			this->tsmiSSonger->Click += gcnew System::EventHandler(this, &Kursova::tsmiSSonger_Click);
 			// 
 			// tsmiSName
 			// 
 			this->tsmiSName->Name = L"tsmiSName";
-			this->tsmiSName->Size = System::Drawing::Size(186, 26);
+			this->tsmiSName->Size = System::Drawing::Size(224, 26);
 			this->tsmiSName->Text = L"Назва";
 			this->tsmiSName->Click += gcnew System::EventHandler(this, &Kursova::tsmiSName_Click);
 			// 
 			// tsmiSAlbom
 			// 
 			this->tsmiSAlbom->Name = L"tsmiSAlbom";
-			this->tsmiSAlbom->Size = System::Drawing::Size(186, 26);
+			this->tsmiSAlbom->Size = System::Drawing::Size(224, 26);
 			this->tsmiSAlbom->Text = L"Альбом";
 			this->tsmiSAlbom->Click += gcnew System::EventHandler(this, &Kursova::tsmiSAlbom_Click);
 			// 
 			// tsmiSYear
 			// 
 			this->tsmiSYear->Name = L"tsmiSYear";
-			this->tsmiSYear->Size = System::Drawing::Size(186, 26);
+			this->tsmiSYear->Size = System::Drawing::Size(224, 26);
 			this->tsmiSYear->Text = L"Рік";
 			this->tsmiSYear->Click += gcnew System::EventHandler(this, &Kursova::tsmiSYear_Click);
 			// 
 			// tsmiSFormat
 			// 
 			this->tsmiSFormat->Name = L"tsmiSFormat";
-			this->tsmiSFormat->Size = System::Drawing::Size(186, 26);
+			this->tsmiSFormat->Size = System::Drawing::Size(224, 26);
 			this->tsmiSFormat->Text = L"Формат";
 			this->tsmiSFormat->Click += gcnew System::EventHandler(this, &Kursova::tsmiSFormat_Click);
 			// 
 			// tsmiSSize
 			// 
 			this->tsmiSSize->Name = L"tsmiSSize";
-			this->tsmiSSize->Size = System::Drawing::Size(186, 26);
+			this->tsmiSSize->Size = System::Drawing::Size(224, 26);
 			this->tsmiSSize->Text = L"Розмір";
 			this->tsmiSSize->Click += gcnew System::EventHandler(this, &Kursova::tsmiSSize_Click);
 			// 
 			// tsmiSImport
 			// 
 			this->tsmiSImport->Name = L"tsmiSImport";
-			this->tsmiSImport->Size = System::Drawing::Size(186, 26);
+			this->tsmiSImport->Size = System::Drawing::Size(224, 26);
 			this->tsmiSImport->Text = L"Зарубіжна";
 			this->tsmiSImport->Click += gcnew System::EventHandler(this, &Kursova::tsmiSImport_Click);
 			// 
@@ -634,14 +635,14 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(186, 104);
+			this->cmsMenu->Size = System::Drawing::Size(177, 76);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsDelete
 			// 
 			this->cmsDelete->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmstbDelete });
 			this->cmsDelete->Name = L"cmsDelete";
-			this->cmsDelete->Size = System::Drawing::Size(122, 24);
+			this->cmsDelete->Size = System::Drawing::Size(176, 24);
 			this->cmsDelete->Text = L"Видалити";
 			this->cmsDelete->Click += gcnew System::EventHandler(this, &Kursova::cmsDelete_Click);
 			// 
@@ -659,7 +660,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->cmstbName, this->cmstbAlbom, this->cmstbYear, this->cmstbFormat, this->cmstbSize, this->cmstbIsImport
 			});
 			this->cmsAdd->Name = L"cmsAdd";
-			this->cmsAdd->Size = System::Drawing::Size(122, 24);
+			this->cmsAdd->Size = System::Drawing::Size(176, 24);
 			this->cmsAdd->Text = L"Додати";
 			this->cmsAdd->ToolTipText = L"Натиснікть коли дадасте всю наявну інормацію";
 			this->cmsAdd->Click += gcnew System::EventHandler(this, &Kursova::cmsAdd_Click);
@@ -722,7 +723,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tstbName, this->tstbAlbom, this->tstbYear, this->tstbFormat, this->tstbSize, this->tstbIsImport
 			});
 			this->tsmiSearch->Name = L"tsmiSearch";
-			this->tsmiSearch->Size = System::Drawing::Size(185, 24);
+			this->tsmiSearch->Size = System::Drawing::Size(176, 24);
 			this->tsmiSearch->Text = L"Детальний пошук";
 			this->tsmiSearch->Click += gcnew System::EventHandler(this, &Kursova::tsmiSearch_Click);
 			// 
@@ -806,5 +807,9 @@ private: System::Void tlpTable_PreviewKeyDown(System::Object^ sender, System::Wi
 private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void bSearch_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiSearch_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void tsmiSNumber_Click(System::Object^ sender, System::EventArgs^ e);
+
+
+
 };
 }
