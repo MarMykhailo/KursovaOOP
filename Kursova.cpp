@@ -158,7 +158,7 @@ System::Void KursovaOOP::Kursova::tsmiSYear_Click(System::Object^ sender, System
 
 System::Void KursovaOOP::Kursova::tsmiSFormat_Click(System::Object^ sender, System::EventArgs^ e)
 {
-    //songManager->sort(CompareFormat,songManager->songList);
+    songManager->sort(CompareFormat,songManager->songList);
     UpdateTable(songManager->songList);
     return System::Void();
 }
@@ -329,9 +329,7 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 		String^ searchString = tbSearch->Text;
 
 		std::string str = msclr::interop::marshal_as<std::string>(searchString);
-		std::vector <std::string> Info;
-
-		//songManager->search(songManager->songList, songManager->tempList1,Info,10);
+		songManager->search(songManager->songList, songManager->tempList1,str);
 		
 		UpdateTable(songManager->tempList1);
 	}
@@ -352,7 +350,7 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSize->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbIsImport->Text));
 
-	//songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
+	songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
 	UpdateTable(songManager->tempList1);
 
 	return System::Void();
