@@ -14,11 +14,6 @@ public:
 	Dlist<Song> tempList1;
 	Dlist<Song> tempList2;
 
-	/*
-	пошук певних елементів
-	сортування за певним критерієм
-	
-	*/
 
 	void sort(int (Compare)(const Song& A, const Song& B), Dlist<Song>& list);
 

@@ -102,62 +102,106 @@ public:
         return -1; // елемент не знайдено
     }
 
-    void swap(int A, int B) {
+    void swap(int A, int B)
+    {
         if (!head || !tail || A < 0 || B < 0 || A >= size || B >= size || A == B) {
             return;
         }
 
         Node* nodeA = &at(A);
         Node* nodeB = &at(B);
+        if (nodeA->next == nodeB || nodeA->prev == nodeB)//елементи є судсідніми
+        {
+            if (nodeA->prev)
+            {
+                nodeA->prev->next = nodeB;//якщо A<B то A->prev->next = B
+            }
+            if (nodeB->next)
+            {
+                nodeB->next->prev = nodeA;//якщо A<B то B->next->prev = A
+            }
 
-        // Оновлюємо вказівники next для сусідів
-        if (std::abs(A - B) == 1) {
-            // Сусідні елементи
-            std::swap(nodeA->next, nodeB->next);
-            std::swap(nodeA->prev, nodeB->prev);
+            nodeA->next = nodeB->next;//якщо A<B то A->next = B->next
+
+            nodeB->prev = nodeA->prev;//якщо A<B то B->prev = A->prev
+
+            nodeA->prev = nodeB;//якщо A<B то A->prev = B
+
+            nodeB->next = nodeA;//якщо A<B то B->next = A
         }
-        else {
-            // Не сусідні елементи
-            // Оновлюємо вказівники next для сусідів
-            if (nodeA->next) {
-                nodeA->next->prev = nodeB;
-            }
-            if (nodeB->next) {
-                nodeB->next->prev = nodeA;
-            }
+        else//елементи є не сусідінми
+        {
+            Node* tempNodeAPrev = nodeA->prev;
+            Node* tempNodeANext = nodeA->next;
 
-            // Оновлюємо вказівники prev для сусідів
-            if (nodeA->prev) {
-                nodeA->prev->next = nodeB;
-            }
-            if (nodeB->prev) {
+            Node* tempNodeBPrev = nodeB->prev;
+            Node* tempNodeBNext = nodeB->next;
+
+
+            //приєднання елементів збоку сусідніх елементів
+            if (nodeB->prev)
+            {
                 nodeB->prev->next = nodeA;
             }
+            if (nodeB->next)
+            {
+                nodeB->next->prev = nodeA;
+            }
+            if (nodeA->prev)
+            {
+                nodeA->prev->next = nodeB;
+            }
+            if (nodeA->next)
+            {
+                nodeA->next->prev = nodeB;
+            }
 
-            // Оновлюємо вказівники для елементів, які обмінюються
-            std::swap(nodeA->next, nodeB->next);
-            std::swap(nodeA->prev, nodeB->prev);
-        }
+            //приєднанян самих елементів до совїх місць
+            //if (nodeA->prev)
+            {
+                nodeA->prev = tempNodeBPrev;
+            }
+            //if (nodeA->next)
+            {
+                nodeA->next = tempNodeBNext;
+            }
+            //if (nodeB->prev)
+            {
+                nodeB->prev = tempNodeAPrev;
+            }
+            //if (nodeB->next)
+            {
+                nodeB->next = tempNodeANext;
+            }
 
-        // Оновлюємо head і tail, якщо необхідно
-        if (head == nodeA) {
-            head = nodeB;
+
         }
-        else if (head == nodeB) {
+        //оновлення head і tail
+        if (nodeA->prev == nullptr) {
             head = nodeA;
         }
-
-        if (tail == nodeA) {
-            tail = nodeB;
+        if (nodeB->prev == nullptr) {
+            head = nodeB;
         }
-        else if (tail == nodeB) {
+
+        if (nodeA->next == nullptr) {
             tail = nodeA;
+        }
+        if (nodeB->next == nullptr) {
+            tail = nodeB;
         }
     }
 
 
 
+    Node* begin() const {
+        return head;
+    }
 
+    // Метод для отримання ітератора на кінець списку
+    Node* end() const {
+        return nullptr;  // Для простоти припустимо, що кінець завжди nullptr
+    }
 
     void removeAt(int index) {
         if (head == nullptr || tail == nullptr) {

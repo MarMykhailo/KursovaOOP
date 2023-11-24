@@ -30,6 +30,7 @@
 
 
 
+
 void SongManager::sort(int (Compare)(const Song& A, const Song& B), Dlist<Song>& list)
 {
 	QuickSort(list, 0, list.getSize() - 1, CompareName);
