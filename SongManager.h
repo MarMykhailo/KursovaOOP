@@ -19,10 +19,12 @@ public:
 
 	void search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::string& key);
 	void searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& searchValues);
-	friend std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
-	friend std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
+
 
 };
 
-std::ofstream& operator<< (std::ofstream& Out, const SongManager& songManager);
-std::ifstream& operator>> (std::ifstream& In, SongManager& songManager);
+
+
+
+
+

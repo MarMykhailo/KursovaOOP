@@ -66,6 +66,22 @@ int CompareYear(const Song& A, const Song& B)
 	}
 }
 
+int CompareDuration(const Song& A, const Song& B)
+{
+	if (A.getDuration() > B.getDuration())
+	{
+		return -1;
+	}
+	else if (A.getDuration() < B.getDuration())
+	{
+		return 1;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
 int CompareFormat(const Song& A, const Song& B)
 {
 	if (A.getFormat() > B.getFormat())

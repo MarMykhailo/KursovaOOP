@@ -7,6 +7,7 @@ Song::Song()
 	this->name = "Non";
 	this->albom = "Non";
 	this->year = 0;
+	this->duration = 0.0;
 	this->format = "Non";
 	this->size = 0;
 	this->isImport = false;
@@ -23,12 +24,13 @@ Song::Song(std::vector<std::string> Songers, std::string Name)
 
 	this->albom = "Non";
 	this->year = 0;
+	this->duration = 0.0;
 	this->format = "Non";
 	this->size = 0;
 	this->isImport = false;
 }
 
-Song::Song(std::vector<std::string> Songers, std::string Name, std::string Albom, int Year, std::string Format, int Size, bool IsImport)
+Song::Song(std::vector<std::string> Songers, std::string Name, std::string Albom = "Unknown", int Year = 0, double Duration = 0.0, std::string Format = ".mp3", int Size = 0, bool IsImport = false)
 {
 	// Заповнюю по чеговості
 	songers.clear();
@@ -39,6 +41,7 @@ Song::Song(std::vector<std::string> Songers, std::string Name, std::string Albom
 	name = Name;
 	albom = Albom;
 	year = Year;
+	duration = Duration;
 	format = Format;
 	size = Size;
 	isImport = IsImport;
@@ -81,6 +84,11 @@ int Song::getYear() const
 	return this->year;
 }
 
+double Song::getDuration() const
+{
+	return this->duration;
+}
+
 std::string Song::getFormat() const
 {
 	return this->format;
@@ -120,6 +128,11 @@ void Song::setYear(int Year)
 	this->year = Year;
 }
 
+void Song::setDuration(double Duration)
+{
+	this->duration = Duration;
+}
+
 void Song::setFormat(std::string Format)
 {
 	this->format = Format;
@@ -141,17 +154,18 @@ Song& Song::operator = (const Song& Other)
 	this->songers = Other.songers;
 	this->name = Other.name;
 	this->albom = Other.albom;
+	this->year = Other.year;
+	this->duration = Other.duration;
 	this->format = Other.format;
 	this->size = Other.size;
 	this->isImport = Other.isImport;
-	this->year = Other.year;
 	return *this;
 }
 
 
 bool Song::operator==(const Song& Other) const
 {
-	return  this->name == Other.name && this->albom == Other.albom && this->year == Other.year && this->format == Other.format && this->size == Other.size && this->isImport == Other.isImport;
+	return  this->name == Other.name && this->albom == Other.albom && this->year == Other.year && this->duration == Other.duration &&this->format == Other.format && this->size == Other.size && this->isImport == Other.isImport;
 }
 
 void Song::clear()
@@ -160,6 +174,7 @@ void Song::clear()
 	this->name.clear();
 	this->albom.clear();
 	this->year = 0;
+	this->duration = 0.0;
 	this->format.clear();
 	this->size = 0;
 	this->isImport = false;
@@ -175,7 +190,7 @@ std::ofstream& operator<<(std::ofstream& out, const Song& song)
 	{
 		out << song.songers[i] << "$";
 	}
-	out << song.name << "$" << song.albom << "$" << song.year << "$" << song.format << "$" << song.size << "$" << song.isImport << "$";
+	out << song.name << "$" << song.albom << "$" << song.year << "$"<<song.duration<< "$" << song.format << "$" << song.size << "$" << song.isImport << "$";
 	return out;
 }
 
@@ -191,6 +206,8 @@ std::ifstream& operator>>(std::ifstream& in, Song& song) {
 	std::getline(in, line, '$');
 	song.year = std::stoi(line);
 	std::getline(in, song.format, '$');
+	std::getline(in, line, '$');
+	song.duration = std::stod(line);
 	std::getline(in, line, '$');
 	song.size = std::stoi(line);
 	std::getline(in, line, '$');

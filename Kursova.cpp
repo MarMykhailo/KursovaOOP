@@ -16,7 +16,7 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 	}
 	else
 	{
-        //out << (*songManager);
+		//out << *Current;
         out.close();
 	}
 	return System::Void();
@@ -38,12 +38,12 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	}
 	else
 	{
-		//in >> (*songManager);
+		//in >> *Current;
 		in.close();
 	}
     
 	UpdateTable(songManager->songList);
-
+	Current = &songManager->songList;
 	return System::Void();
 }
 
@@ -58,9 +58,10 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
     tlpTable->Controls->Add(lName, 2, 0);
     tlpTable->Controls->Add(lAlbom, 3, 0);
     tlpTable->Controls->Add(lYear, 4, 0);
-    tlpTable->Controls->Add(lFormat, 5, 0);
-    tlpTable->Controls->Add(lSize, 6, 0);
-    tlpTable->Controls->Add(lIsImport, 7, 0);
+	tlpTable->Controls->Add(lDuration, 5, 0);
+    tlpTable->Controls->Add(lFormat, 6, 0);
+    tlpTable->Controls->Add(lSize, 7, 0);
+    tlpTable->Controls->Add(lIsImport, 8, 0);
 
     // Додати дані про пісні
     for (int i = 0; i < DList.getSize(); i++) {
@@ -82,7 +83,7 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
         Label^ songerLabel = gcnew Label();
         songerLabel->Text = gcnew String(allSongers.c_str());
         songerLabel->AutoSize = true;
-        songerLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);  // Додайте обробник подій
+        songerLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);  
         tlpTable->Controls->Add(songerLabel, 1, i + 1);
 
         Label^ nameLabel = gcnew Label();
@@ -103,23 +104,29 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
         yearLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(yearLabel, 4, i + 1);
 
+		Label^ durationLabel = gcnew Label();
+		durationLabel->Text = currentSong.getDuration().ToString();
+		durationLabel->AutoSize = true;
+		durationLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(durationLabel, 5, i + 1);
+
         Label^ formatLabel = gcnew Label();
         formatLabel->Text = gcnew String(currentSong.getFormat().c_str());
         formatLabel->AutoSize = true;
         formatLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(formatLabel, 5, i + 1);
+        tlpTable->Controls->Add(formatLabel, 6, i + 1);
 
         Label^ sizeLabel = gcnew Label();
         sizeLabel->Text = currentSong.getSize().ToString();
         sizeLabel->AutoSize = true;
         sizeLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(sizeLabel, 6, i + 1);
+        tlpTable->Controls->Add(sizeLabel, 7, i + 1);
 
         Label^ isImportLabel = gcnew Label();
-        isImportLabel->Text = currentSong.getIsImport() ? "Yes" : "No";
+        isImportLabel->Text = currentSong.getIsImport() ? L"Так" : L"Так";
         isImportLabel->AutoSize = true;
         isImportLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(isImportLabel, 7, i + 1);
+        tlpTable->Controls->Add(isImportLabel, 8, i + 1);
     }
 
     // Встановити авто розмір для колонок і рядків
@@ -132,6 +139,7 @@ System::Void KursovaOOP::Kursova::tsmiSSonger_Click(System::Object^ sender, Syst
 {
 	songManager->sort(CompareSongers, songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -139,6 +147,7 @@ System::Void KursovaOOP::Kursova::tsmiSName_Click(System::Object^ sender, System
 {
 	songManager->sort(CompareName,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -146,6 +155,7 @@ System::Void KursovaOOP::Kursova::tsmiSAlbom_Click(System::Object^ sender, Syste
 {
     songManager->sort(CompareAlbom,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -153,13 +163,22 @@ System::Void KursovaOOP::Kursova::tsmiSYear_Click(System::Object^ sender, System
 {
     songManager->sort(CompareYear,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::tsmiSDuration_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	songManager->sort(CompareDuration,songManager->songList);
+	UpdateTable(songManager->songList);
+	return System::Void();
 }
 
 System::Void KursovaOOP::Kursova::tsmiSFormat_Click(System::Object^ sender, System::EventArgs^ e)
 {
     songManager->sort(CompareFormat,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -167,6 +186,7 @@ System::Void KursovaOOP::Kursova::tsmiSSize_Click(System::Object^ sender, System
 {
     songManager->sort(CompareSize,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -174,6 +194,7 @@ System::Void KursovaOOP::Kursova::tsmiSImport_Click(System::Object^ sender, Syst
 {
     songManager->sort(CompareIsImport,songManager->songList);
     UpdateTable(songManager->songList);
+	Current = &songManager->songList;
     return System::Void();
 }
 
@@ -219,6 +240,7 @@ System::Void KursovaOOP::Kursova::cmsDelete_Click(System::Object^ sender, System
 	// Видалення пісні та оновлення таблиці
 	songManager->songList.removeAt(deleteIndex - 1);
 	UpdateTable(songManager->songList);
+	Current = &songManager->songList;
 	return System::Void();
 }
 
@@ -260,6 +282,8 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 		std::string name = msclr::interop::marshal_as<std::string>(cmstbName->Text);
 		song->setName(name);
 	}
+	else
+
 
 	// Дані про альбом
 	if (!String::IsNullOrEmpty(cmstbAlbom->Text))
@@ -276,8 +300,20 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 			song->setYear(year);
 		}
 		else {
-			// Обробка помилки, наприклад, виведення повідомлення користувачу або інше необхідне дійство
-			// Наприклад, MessageBox::Show("Введіть правильний рік");
+			MessageBox::Show(L"Введіть правильний рік");
+			return;
+		}
+	}
+
+	// Дані про тривалість
+	if (!String::IsNullOrEmpty(cmstbDuration->Text))
+	{
+		double duration;
+		if (Double::TryParse(cmstbDuration->Text, duration)) {
+			song->setDuration(duration);
+		}
+		else {
+			MessageBox::Show(L"Введіть правильну тривалість");
 			return;
 		}
 	}
@@ -318,6 +354,8 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 
 	songManager->songList.push_front(*song);
 	UpdateTable(songManager->songList);
+	Current = &songManager->songList;
+
     return System::Void();
 }
 
@@ -332,6 +370,7 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 		songManager->search(songManager->songList, songManager->tempList1,str);
 		
 		UpdateTable(songManager->tempList1);
+		Current = &songManager->tempList1;
 	}
 
 	return System::Void();
@@ -352,12 +391,8 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 
 	songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
 	UpdateTable(songManager->tempList1);
+	Current = &songManager->tempList1;
 
-	return System::Void();
-}
-
-System::Void KursovaOOP::Kursova::tsmiSNumber_Click(System::Object^ sender, System::EventArgs^ e)
-{
 	return System::Void();
 }
 

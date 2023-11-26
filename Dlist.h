@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <fstream>
+//#include "Song.h"
+
 
 template <typename T>
 class Dlist {
@@ -76,7 +78,6 @@ public:
         return current->data;
     }
 
-
     Node& at(int index) {
         if (index < 0 || index >= size) {
             throw std::out_of_range("Index out of range");
@@ -87,7 +88,6 @@ public:
         }
         return *current;
     }
-
 
     int find(const T& value) const {
         Node* current = head;
@@ -183,7 +183,6 @@ public:
         if (nodeB->prev == nullptr) {
             head = nodeB;
         }
-
         if (nodeA->next == nullptr) {
             tail = nodeA;
         }
@@ -250,27 +249,26 @@ public:
         return *this;
     }
 
+
+    // Оператор виведення для Dlist
     friend std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list);
 
+    // Оператор введення для Dlist
     friend std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list);
 
 };
 
-
-template<typename T>
-std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list)
-{
+template <typename T>
+std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list) {
     typename Dlist<T>::Node* current = list.head;
     while (current != nullptr) {
-        out << current->data << std::endl;
+        out << current->data << std::endl;  // Викликає оператор виведення для типу T
         current = current->next;
     }
     return out;
 }
 
-
-
-template<typename T>
+template <typename T>
 std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {
     T value;
     while (in >> value) {
@@ -278,5 +276,3 @@ std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {
     }
     return in;
 }
-
-
