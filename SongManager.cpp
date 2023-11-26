@@ -86,8 +86,7 @@ void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, con
         fieldValues.push_back(std::to_wstring(song.getDuration())); // Тривалість
         fieldValues.push_back(song.getFormat()); // Формат
         fieldValues.push_back(std::to_wstring(song.getSize())); // Розмір
-        //fieldValues.push_back(std::to_string(song.getIsImport())); // Зарубіжна
-        fieldValues.push_back(std::to_wstring(song.getIsImport())); // Зарубіжна.//проблема через те що пишук українською
+        fieldValues.push_back(song.getIsImport() ? L"Так" : L"Ні"); // Зарубіжна.//проблема через те що пишук українською
 
         // Перевірка входження searchValues у вибрані поля пісні
         bool found = true;

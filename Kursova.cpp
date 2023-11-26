@@ -1,4 +1,7 @@
 ﻿#include "Kursova.h"
+#include <locale>
+#include <codecvt>
+
 
 System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -8,6 +11,7 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 	std::wstring stdString = msclr::interop::marshal_as<std::wstring>(managedString) + L".txt";
 
 	std::wofstream out;
+	out.imbue(std::locale(out.getloc(), new std::codecvt_utf8<wchar_t>));
 
 	out.open(stdString, std::ios::out);
 	if (!out.is_open())
@@ -30,8 +34,9 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	std::wstring stdString = msclr::interop::marshal_as<std::wstring>(managedString) + L".txt";
 
 	std::wifstream in;
+	in.imbue(std::locale(in.getloc(), new std::codecvt_utf8<wchar_t>));
 
-	in.open(stdString, std::ios::out | std::ios::app);
+	in.open(stdString, std::ios::in);
 	if (!in.is_open())
 	{
 		MessageBox::Show(L"Помилка зчитування з файла");
@@ -220,20 +225,20 @@ System::Void KursovaOOP::Kursova::cmsDelete_Click(System::Object^ sender, System
 
 	// Перевірка на пустий рядок
 	if (String::IsNullOrEmpty(deleteIndexText)) {
-		MessageBox::Show(L"Please enter an index to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Введіть індекс щоб видалити.", L"Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
 	// Перевірка на коректний формат числа
 	int deleteIndex;
 	if (!Int32::TryParse(deleteIndexText, deleteIndex)) {
-		MessageBox::Show(L"Invalid index. Please enter a valid integer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Непарвильинй індекс. Введіть число.", L"Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
 	// Перевірка на допустимий діапазон індексів
 	if (deleteIndex-1 < 0 || deleteIndex-1 >= songManager->songList.getSize()) {
-		MessageBox::Show(L"Index out of range. Please enter a valid index.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Вихід за межі. Введіть коректний індекс.", L"Помилка", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
