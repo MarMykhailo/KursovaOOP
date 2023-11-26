@@ -35,7 +35,7 @@ void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::
             std::to_string(song.getDuration()),
             song.getFormat(),
             std::to_string(song.getSize()),
-            song.getIsImport() ? "yes" : "not"
+            song.getIsImport() ? "1" : "0"
         };
 
         // Перевірка входження ключа у всі поля пісні
@@ -85,11 +85,12 @@ void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, con
         fieldValues.push_back(std::to_string(song.getDuration())); // Тривалість
         fieldValues.push_back(song.getFormat()); // Формат
         fieldValues.push_back(std::to_string(song.getSize())); // Розмір
-        fieldValues.push_back(song.getIsImport() ? "yes" : "not"); // Зарубіжна
+        //fieldValues.push_back(std::to_string(song.getIsImport())); // Зарубіжна
+        fieldValues.push_back(std::to_string(song.getIsImport())); // Зарубіжна.//проблема через те що пишук українською
 
         // Перевірка входження searchValues у вибрані поля пісні
         bool found = true;
-        for (int j = 0; j < 7; j++) {
+        for (int j = 0; j < 8; j++) {
             // Перевірка, чи поле для пошуку не є порожнім рядком
             if (!searchValues[j].empty()) {
                 std::string lowerCaseField = fieldValues[j];
@@ -100,7 +101,7 @@ void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, con
 
                 if (lowerCaseField.find(lowerCaseStr) == std::string::npos) {
                     found = false;
-                    break;  // Якщо хоча б одне поле не співпадає, виходимо з циклу
+                    //break;  // Якщо хоча б одне поле не співпадає, виходимо з циклу
                 }
             }
         }

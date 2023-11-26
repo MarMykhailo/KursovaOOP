@@ -123,7 +123,7 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
         tlpTable->Controls->Add(sizeLabel, 7, i + 1);
 
         Label^ isImportLabel = gcnew Label();
-        isImportLabel->Text = currentSong.getIsImport() ? L"Так" : L"Так";
+        isImportLabel->Text = currentSong.getIsImport() ? L"Так" : L"Ні";
         isImportLabel->AutoSize = true;
         isImportLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
         tlpTable->Controls->Add(isImportLabel, 8, i + 1);
