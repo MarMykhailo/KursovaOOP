@@ -5,7 +5,7 @@ void SongManager::sort(int (Compare)(const Song& A, const Song& B), Dlist<Song>&
 	QuickSort(list, 0, list.getSize() - 1, Compare);
 }
 
-void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::string& key)
+void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::wstring& key)
 {
     // Очистіть список результатів пошуку перед кожним пошуком
     inList.clear();
@@ -27,29 +27,30 @@ void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::
         const Song& song = fromList[i];
 
         // Збереження значень полів для порівняння
-        std::vector<std::string> fieldValues = {
+        std::vector<std::wstring> fieldValues = {
             song.getSongers()[0],
             song.getName(),
             song.getAlbom(),
-            std::to_string(song.getYear()),
-            std::to_string(song.getDuration()),
+            std::to_wstring(song.getYear()),
+            std::to_wstring(song.getDuration()),
             song.getFormat(),
-            std::to_string(song.getSize()),
-            song.getIsImport() ? "1" : "0"
+            std::to_wstring(song.getSize()),
+            song.getIsImport() ? L"1" : L"0"
         };
+
 
         // Перевірка входження ключа у всі поля пісні
         bool found = false;
 
         // Перевіряємо всі поля
-        for (const std::string& fieldValue : fieldValues) {
-            std::string lowerCaseField = fieldValue;
+        for (const std::wstring& fieldValue : fieldValues) {
+            std::wstring lowerCaseField = fieldValue;
             std::transform(lowerCaseField.begin(), lowerCaseField.end(), lowerCaseField.begin(), ::tolower);
 
-            std::string lowerCaseKey = key;
+            std::wstring lowerCaseKey = key;
             std::transform(lowerCaseKey.begin(), lowerCaseKey.end(), lowerCaseKey.begin(), ::tolower);
 
-            if (lowerCaseField.find(lowerCaseKey) != std::string::npos) {
+            if (lowerCaseField.find(lowerCaseKey) != std::wstring::npos) {
                 found = true;
                 break;  // Якщо хоча б одне поле містить ключ, виходимо з циклу
             }
@@ -62,7 +63,7 @@ void SongManager::search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::
     }
 }
 
-void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& searchValues)
+void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::wstring>& searchValues)
 {
     // Очистіть список результатів пошуку перед кожним пошуком
     inList.clear();
@@ -77,29 +78,29 @@ void SongManager::searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, con
         const Song& song = fromList[i];
 
         // Вибір полів для пошуку
-        std::vector<std::string> fieldValues;
+        std::vector<std::wstring> fieldValues;
         fieldValues.push_back(song.getSongers()[0]); // Виконавець
         fieldValues.push_back(song.getName()); // Назва
         fieldValues.push_back(song.getAlbom()); // Альбом
-        fieldValues.push_back(std::to_string(song.getYear())); // Рік
-        fieldValues.push_back(std::to_string(song.getDuration())); // Тривалість
+        fieldValues.push_back(std::to_wstring(song.getYear())); // Рік
+        fieldValues.push_back(std::to_wstring(song.getDuration())); // Тривалість
         fieldValues.push_back(song.getFormat()); // Формат
-        fieldValues.push_back(std::to_string(song.getSize())); // Розмір
+        fieldValues.push_back(std::to_wstring(song.getSize())); // Розмір
         //fieldValues.push_back(std::to_string(song.getIsImport())); // Зарубіжна
-        fieldValues.push_back(std::to_string(song.getIsImport())); // Зарубіжна.//проблема через те що пишук українською
+        fieldValues.push_back(std::to_wstring(song.getIsImport())); // Зарубіжна.//проблема через те що пишук українською
 
         // Перевірка входження searchValues у вибрані поля пісні
         bool found = true;
         for (int j = 0; j < 8; j++) {
             // Перевірка, чи поле для пошуку не є порожнім рядком
             if (!searchValues[j].empty()) {
-                std::string lowerCaseField = fieldValues[j];
+                std::wstring lowerCaseField = fieldValues[j];
                 std::transform(lowerCaseField.begin(), lowerCaseField.end(), lowerCaseField.begin(), ::tolower);
 
-                std::string lowerCaseStr = searchValues[j];
+                std::wstring lowerCaseStr = searchValues[j];
                 std::transform(lowerCaseStr.begin(), lowerCaseStr.end(), lowerCaseStr.begin(), ::tolower);
 
-                if (lowerCaseField.find(lowerCaseStr) == std::string::npos) {
+                if (lowerCaseField.find(lowerCaseStr) == std::wstring::npos) {
                     found = false;
                     //break;  // Якщо хоча б одне поле не співпадає, виходимо з циклу
                 }

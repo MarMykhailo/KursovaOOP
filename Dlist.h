@@ -252,16 +252,16 @@ public:
 
     // Оператор виведення для Dlist
     template<typename T>
-    friend std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list);
+    friend std::wofstream& operator<<(std::wofstream& out, const Dlist<T>& list);
 
     // Оператор введення для Dlist
     template<typename T>
-    friend std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list);
+    friend std::wifstream& operator>>(std::wifstream& in, Dlist<T>& list);
 
 };
 
 template <typename T>
-std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list) {
+std::wofstream& operator<<(std::wofstream& out, const Dlist<T>& list) {
     typename Dlist<T>::Node* current = list.head;
     while (current != nullptr) {
         out << current->data;  // Викликає оператор виведення для типу T
@@ -276,7 +276,7 @@ std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list) {
 }
 
 template <typename T>
-std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list) {
+std::wifstream& operator>>(std::wifstream& in, Dlist<T>& list) {
     T value;
     while (in >> value) {
         list.push_back(value);

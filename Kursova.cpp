@@ -5,9 +5,9 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 	//беру назу файла і додаю до ньоо .txt
 	//записую в файл
 	System::String^ managedString = mstbNameFileOut->Text;
-	std::string stdString = msclr::interop::marshal_as<std::string>(managedString) + ".txt";
+	std::wstring stdString = msclr::interop::marshal_as<std::wstring>(managedString) + L".txt";
 
-	std::ofstream out;
+	std::wofstream out;
 
 	out.open(stdString, std::ios::out);
 	if (!out.is_open())
@@ -27,14 +27,14 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	//беру назу файла і додаю до ньоо .txt
 	//записую в файл
 	System::String^ managedString = mstbNameFileIn->Text;
-	std::string stdString = msclr::interop::marshal_as<std::string>(managedString) + ".txt";
+	std::wstring stdString = msclr::interop::marshal_as<std::wstring>(managedString) + L".txt";
 
-	std::ifstream in;
+	std::wifstream in;
 
 	in.open(stdString, std::ios::out | std::ios::app);
 	if (!in.is_open())
 	{
-		MessageBox::Show("Error");
+		MessageBox::Show(L"Помилка зчитування з файла");
 	}
 	else
 	{
@@ -72,10 +72,10 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
         numberLabel->AutoSize = true;
         tlpTable->Controls->Add(numberLabel, 0, i + 1);
 
-        std::string allSongers;
+        std::wstring allSongers;
         for (int j = 0; j < currentSong.getSongers().size(); j++) {
             if (j > 0) {
-                allSongers += ", ";
+                allSongers += L", ";
             }
             allSongers += currentSong.getSongers()[j];
         }
@@ -220,20 +220,20 @@ System::Void KursovaOOP::Kursova::cmsDelete_Click(System::Object^ sender, System
 
 	// Перевірка на пустий рядок
 	if (String::IsNullOrEmpty(deleteIndexText)) {
-		MessageBox::Show("Please enter an index to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Please enter an index to delete.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
 	// Перевірка на коректний формат числа
 	int deleteIndex;
 	if (!Int32::TryParse(deleteIndexText, deleteIndex)) {
-		MessageBox::Show("Invalid index. Please enter a valid integer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Invalid index. Please enter a valid integer.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
 	// Перевірка на допустимий діапазон індексів
 	if (deleteIndex-1 < 0 || deleteIndex-1 >= songManager->songList.getSize()) {
-		MessageBox::Show("Index out of range. Please enter a valid index.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+		MessageBox::Show(L"Index out of range. Please enter a valid index.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 		return;
 	}
 
@@ -260,13 +260,13 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	// Дані про виконавців
 	if (!String::IsNullOrEmpty(cmstbSongers->Text))
 	{
-		std::vector<std::string> songers;
+		std::vector<std::wstring> songers;
 		// Виконавці розділені комою
-		std::string songersString = msclr::interop::marshal_as<std::string>(cmstbSongers->Text);
-		std::string delimiter = ",";
+		std::wstring songersString = msclr::interop::marshal_as<std::wstring>(cmstbSongers->Text);
+		std::wstring delimiter = L",";
 		size_t pos = 0;
-		std::string token;
-		while ((pos = songersString.find(delimiter)) != std::string::npos) {
+		std::wstring token;
+		while ((pos = songersString.find(delimiter)) != std::wstring::npos) {
 			token = songersString.substr(0, pos);
 			songers.push_back(token);
 			songersString.erase(0, pos + delimiter.length());
@@ -279,7 +279,7 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	// Дані про назву
 	if (!String::IsNullOrEmpty(cmstbName->Text))
 	{
-		std::string name = msclr::interop::marshal_as<std::string>(cmstbName->Text);
+		std::wstring name = msclr::interop::marshal_as<std::wstring>(cmstbName->Text);
 		song->setName(name);
 	}
 
@@ -287,7 +287,7 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	// Дані про альбом
 	if (!String::IsNullOrEmpty(cmstbAlbom->Text))
 	{
-		std::string albom = msclr::interop::marshal_as<std::string>(cmstbAlbom->Text);
+		std::wstring albom = msclr::interop::marshal_as<std::wstring>(cmstbAlbom->Text);
 		song->setAlbom(albom);
 	}
 
@@ -320,7 +320,7 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	// Дані про формат
 	if (!String::IsNullOrEmpty(cmstbFormat->Text))
 	{
-		std::string format = msclr::interop::marshal_as<std::string>(cmstbFormat->Text);
+		std::wstring format = msclr::interop::marshal_as<std::wstring>(cmstbFormat->Text);
 		song->setFormat(format);
 	}
 
@@ -364,7 +364,7 @@ System::Void KursovaOOP::Kursova::bSearch_Click(System::Object^ sender, System::
 		// Отримуємо рядок з TextBox
 		String^ searchString = tbSearch->Text;
 
-		std::string str = msclr::interop::marshal_as<std::string>(searchString);
+		std::wstring str = msclr::interop::marshal_as<std::wstring>(searchString);
 		songManager->search(songManager->songList, songManager->tempList1,str);
 		
 		UpdateTable(songManager->tempList1);
@@ -378,15 +378,15 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 {
 	Dlist<Song>* tempList1 = new Dlist<Song>();
 	Dlist<Song>* tempList2 = new Dlist<Song>();
-	std::vector<std::string> Info;
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSongers->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbName->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbAlbom->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbYear->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbDuration->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbFormat->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSize->Text));
-	Info.push_back(msclr::interop::marshal_as<std::string>(tstbIsImport->Text));
+	std::vector<std::wstring> Info;
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbSongers->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbName->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbAlbom->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbYear->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbDuration->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbFormat->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbSize->Text));
+	Info.push_back(msclr::interop::marshal_as<std::wstring>(tstbIsImport->Text));
 
 	songManager->searchByFields(songManager->songList, songManager->tempList1, Info);
 	UpdateTable(songManager->tempList1);

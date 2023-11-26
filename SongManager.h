@@ -17,8 +17,8 @@ public:
 
 	void sort(int (Compare)(const Song& A, const Song& B), Dlist<Song>& list);
 
-	void search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::string& key);
-	void searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::string>& searchValues);
+	void search(Dlist<Song>& fromList, Dlist<Song>& inList, const std::wstring& key);
+	void searchByFields(Dlist<Song>& fromList, Dlist<Song>& inList, const std::vector<std::wstring>& searchValues);
 
 
 };
