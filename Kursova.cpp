@@ -16,7 +16,7 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 	}
 	else
 	{
-		//out << *Current;
+		out << *Current;
         out.close();
 	}
 	return System::Void();
@@ -38,7 +38,7 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	}
 	else
 	{
-		//in >> *Current;
+		in >> *Current;
 		in.close();
 	}
     
@@ -282,7 +282,6 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 		std::string name = msclr::interop::marshal_as<std::string>(cmstbName->Text);
 		song->setName(name);
 	}
-	else
 
 
 	// Дані про альбом
@@ -328,13 +327,12 @@ System::Void KursovaOOP::Kursova::cmsAdd_Click(System::Object^ sender, System::E
 	// Дані про розмір
 	if (!String::IsNullOrEmpty(cmstbSize->Text))
 	{
-		int size;
-		if (Int32::TryParse(cmstbSize->Text, size)) {
+		double size;
+		if (Double::TryParse(cmstbSize->Text, size)) {
 			song->setSize(size);
 		}
 		else {
-			// Обробка помилки, наприклад, виведення повідомлення користувачу або інше необхідне дійство
-			// Наприклад, MessageBox::Show("Введіть правильний розмір");
+			MessageBox::Show(L"Введіть правильний розмір");
 			return;
 		}
 	}
@@ -385,6 +383,7 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbName->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbAlbom->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbYear->Text));
+	Info.push_back(msclr::interop::marshal_as<std::string>(tstbDuration->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbFormat->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbSize->Text));
 	Info.push_back(msclr::interop::marshal_as<std::string>(tstbIsImport->Text));

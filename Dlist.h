@@ -251,9 +251,11 @@ public:
 
 
     // Оператор виведення для Dlist
+    template<typename T>
     friend std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list);
 
     // Оператор введення для Dlist
+    template<typename T>
     friend std::ifstream& operator>>(std::ifstream& in, Dlist<T>& list);
 
 };
@@ -262,8 +264,13 @@ template <typename T>
 std::ofstream& operator<<(std::ofstream& out, const Dlist<T>& list) {
     typename Dlist<T>::Node* current = list.head;
     while (current != nullptr) {
-        out << current->data << std::endl;  // Викликає оператор виведення для типу T
+        out << current->data;  // Викликає оператор виведення для типу T
+        if (current->next)
+        {
+            out << std::endl;
+        }
         current = current->next;
+       
     }
     return out;
 }

@@ -15,12 +15,12 @@ class Song
     int year;
     double duration;
     std::string format;
-    int size;
+    double size;
     bool isImport;
 public:
     Song();
     Song(std::vector<std::string> Songers, std::string Name);
-    Song(std::vector<std::string> Songers, std::string Name, std::string Albom, int Year, double Duration, std::string Format, int Size, bool IsImport);
+    Song(std::vector<std::string> Songers, std::string Name, std::string Albom, int Year, double Duration, std::string Format, double Size, bool IsImport);
     Song(const Song& other);
     Song(Song&& other);
     ~Song();
@@ -31,7 +31,7 @@ public:
     int getYear() const;
     double getDuration() const;
     std::string getFormat() const;
-    int getSize() const;
+    double getSize() const;
     bool getIsImport() const;
 
     void setSongers(std::vector<std::string> Songers);
@@ -40,7 +40,7 @@ public:
     void setYear(int Year);
     void setDuration(double Duration);
     void setFormat(std::string Format);
-    void setSize(int Size);
+    void setSize(double Size);
     void setIsImport(bool IsImport);
 
 

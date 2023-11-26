@@ -30,7 +30,7 @@ Song::Song(std::vector<std::string> Songers, std::string Name)
 	this->isImport = false;
 }
 
-Song::Song(std::vector<std::string> Songers, std::string Name, std::string Albom = "Unknown", int Year = 0, double Duration = 0.0, std::string Format = ".mp3", int Size = 0, bool IsImport = false)
+Song::Song(std::vector<std::string> Songers, std::string Name, std::string Albom = "Unknown", int Year = 0, double Duration = 0.0, std::string Format = ".mp3", double Size = 0, bool IsImport = false)
 {
 	// Заповнюю по чеговості
 	songers.clear();
@@ -94,7 +94,7 @@ std::string Song::getFormat() const
 	return this->format;
 }
 
-int Song::getSize() const
+double Song::getSize() const
 {
 	return this->size;
 }
@@ -138,7 +138,7 @@ void Song::setFormat(std::string Format)
 	this->format = Format;
 }
 
-void Song::setSize(int Size)
+void Song::setSize(double Size)
 {
 	this->size = Size;
 }
@@ -180,37 +180,41 @@ void Song::clear()
 	this->isImport = false;
 }
 
-std::ofstream& operator<<(std::ofstream& out, const Song& song)
-{
-
-	out.fill('$');
+std::ofstream& operator<<(std::ofstream& out, const Song& song) {
 	out << song.songers.size() << "$";
-
-	for (size_t i = 0; i < song.songers.size(); i++)
-	{
-		out << song.songers[i] << "$";
+	for (const std::string& singer : song.songers) {
+		out << singer << "$";
 	}
-	out << song.name << "$" << song.albom << "$" << song.year << "$"<<song.duration<< "$" << song.format << "$" << song.size << "$" << song.isImport << "$";
+	out << song.name << "$" << song.albom << "$" << song.year << "$" << song.duration << "$" << song.format << "$" << song.size << "$" << (song.isImport ? "1" : "0") << "$";
 	return out;
 }
 
 std::ifstream& operator>>(std::ifstream& in, Song& song) {
 	std::string line;
 	std::getline(in, line, '$');
-	int numEl = std::stoi(line);
-	for (size_t i = 0; i < numEl; i++) {
-		std::getline(in, song.songers[i], '$');
+	try {
+		int numEl = std::stoi(line);
+		song.songers.clear();  // Очистимо попередні дані про співаків
+		for (int i = 0; i < numEl; i++) {
+			std::getline(in, line, '$');
+			song.songers.push_back(line);
+		}
+		std::getline(in, song.name, '$');
+		std::getline(in, song.albom, '$');
+		std::getline(in, line, '$');
+		song.year = std::stoi(line);
+		std::getline(in, line, '$');
+		song.duration = std::stod(line);
+		std::getline(in, song.format, '$');
+		std::getline(in, line, '$');
+		song.size = std::stod(line);
+		std::getline(in, line, '$');
+		song.isImport = (line == "1") ? true : false;
 	}
-	std::getline(in, song.name, '$');
-	std::getline(in, song.albom, '$');
-	std::getline(in, line, '$');
-	song.year = std::stoi(line);
-	std::getline(in, song.format, '$');
-	std::getline(in, line, '$');
-	song.duration = std::stod(line);
-	std::getline(in, line, '$');
-	song.size = std::stoi(line);
-	std::getline(in, line, '$');
-	song.isImport = line == "1" ? true : false;
+	catch (const std::exception& e) {
+		// Обробка винятку при конвертації рядка в число
+		std::cerr << "Error reading from file: " << e.what() << std::endl;
+		// Можливо, потрібно виконати інші дії для обробки помилки
+	}
 	return in;
 }
