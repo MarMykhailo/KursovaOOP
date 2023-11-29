@@ -22,10 +22,10 @@ Song::Song(std::vector<std::wstring> Songers, std::wstring Name)
 		songers.push_back(Songers[i]);
 	}
 
-	this->albom = L"Non";
+	this->albom = L"-";
 	this->year = 0;
 	this->duration = 0.0;
-	this->format = L"Non";
+	this->format = L"-";
 	this->size = 0;
 	this->isImport = false;
 }
