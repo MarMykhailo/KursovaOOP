@@ -49,8 +49,8 @@ namespace KursovaOOP {
 
 
 
-	private: System::Windows::Forms::ToolStripMenuItem^ tsmiDarck;
-	private: System::Windows::Forms::ToolStripMenuItem^ tsmiLight;
+
+
 
 
 
@@ -383,8 +383,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->tsddbStyle = (gcnew System::Windows::Forms::ToolStripDropDownButton());
 			this->tsmiFont = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiTheme = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tsmiDarck = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->tsmiLight = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cmsMenu = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->cmsAdd = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cmstbSongers = (gcnew System::Windows::Forms::ToolStripTextBox());
@@ -739,28 +737,10 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// tsmiTheme
 			// 
-			this->tsmiTheme->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
-				this->tsmiDarck,
-					this->tsmiLight
-			});
 			this->tsmiTheme->Name = L"tsmiTheme";
 			this->tsmiTheme->Size = System::Drawing::Size(224, 26);
 			this->tsmiTheme->Text = L"Тема";
 			this->tsmiTheme->Click += gcnew System::EventHandler(this, &Kursova::tsmiTheme_Click);
-			// 
-			// tsmiDarck
-			// 
-			this->tsmiDarck->Name = L"tsmiDarck";
-			this->tsmiDarck->Size = System::Drawing::Size(224, 26);
-			this->tsmiDarck->Text = L"Темна";
-			this->tsmiDarck->Click += gcnew System::EventHandler(this, &Kursova::tsmiDarck_Click);
-			// 
-			// tsmiLight
-			// 
-			this->tsmiLight->Name = L"tsmiLight";
-			this->tsmiLight->Size = System::Drawing::Size(224, 26);
-			this->tsmiLight->Text = L"Світла";
-			this->tsmiLight->Click += gcnew System::EventHandler(this, &Kursova::tsmiLight_Click);
 			// 
 			// cmsMenu
 			// 

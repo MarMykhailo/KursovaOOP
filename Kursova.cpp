@@ -445,24 +445,30 @@ System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System
 	{
 		this->Controls[i]->BackColor = colorDialog->Color;
 	}
-	//встановлюємо колір букв сірим для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
+	//встановлюємо контрастний колір букв для всіх елементів Kursova в циклі
+	//визначаємо контрастний колір для кольору фону
+	int r = colorDialog->Color.R;
+	int g = colorDialog->Color.G;
+	int b = colorDialog->Color.B;
+	int contrast = (r * 299 + g * 587 + b * 114) / 1000;
+	if (contrast > 125)
 	{
-		this->Controls[i]->ForeColor = System::Drawing::Color::Gray;
+		//встановлюємо колір букв чорним для всіх елементів Kursova в циклі
+		for (int i = 0; i < this->Controls->Count; i++)
+		{
+			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+		}
 	}
-	//зміна кольору усіх кнопок і загалом 
-	for (int i = 0; i < this->Controls->Count; i++)
+	else
 	{
-		if (this->Controls[i]->GetType() == System::Windows::Forms::Button::typeid)
+		//встановлюємо колір букв білим для всіх елементів Kursova в циклі
+		for (int i = 0; i < this->Controls->Count; i++)
 		{
-			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+			this->Controls[i]->ForeColor = System::Drawing::Color::White;
 		}
-		if (this->Controls[i]->GetType() == System::Windows::Forms::MenuStrip::typeid)
-		{
-			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
-		}
+	}
 
-	}
+	
 	return System::Void();
 }
 
