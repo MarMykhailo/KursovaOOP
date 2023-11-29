@@ -406,5 +406,88 @@ System::Void KursovaOOP::Kursova::cmsClear_Click(System::Object^ sender, System:
 	return System::Void();
 }
 
+System::Void KursovaOOP::Kursova::tsmiFont_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	FontDialog^ fontDialog = gcnew FontDialog();
+	fontDialog->ShowDialog();
+	tlpTable->Font = fontDialog->Font;//
+	//Встановлення шрифта для всіх елементів Kursova в циклі
+
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->Font = fontDialog->Font;
+	}
+	//перевірка чи шрифт є не завеликий (не більше 12)
+	if (fontDialog->Font->Size > 12)
+	{
+		
+		//встановлення 14 шрифта
+		tlpTable->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12);
+		//Встановлення шрифта для всіх елементів Kursova в циклі
+		for (int i = 0; i < this->Controls->Count; i++)
+		{
+			this->Controls[i]->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12);
+		}
+	}
+
+	
+
+	return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	ColorDialog^ colorDialog = gcnew ColorDialog();
+	colorDialog->ShowDialog();
+	tlpTable->BackColor = colorDialog->Color;
+	//Встановлення кольору для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->BackColor = colorDialog->Color;
+	}
+	//встановлюємо колір букв сірим для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->ForeColor = System::Drawing::Color::Gray;
+	}
+	return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::tsmiDarck_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	ColorDialog^ colorDialog = gcnew ColorDialog();
+	colorDialog->ShowDialog();
+	tlpTable->BackColor = colorDialog->Color;
+	//Встановлення кольору для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->BackColor = colorDialog->Color;
+	}
+	//встановлюємо колір букв сірим для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->ForeColor = System::Drawing::Color::Gray;
+	}
+	return System::Void();
+}
+
+System::Void KursovaOOP::Kursova::tsmiLight_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	ColorDialog^ colorDialog = gcnew ColorDialog();
+	colorDialog->ShowDialog();
+	tlpTable->BackColor = colorDialog->Color;
+	//Встановлення кольору для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->BackColor = colorDialog->Color;
+	}
+	//встановлюємо колір букв чорним для всіх елементів Kursova в циклі
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+	}
+	return System::Void();
+}
+
 
 
