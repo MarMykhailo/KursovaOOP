@@ -439,6 +439,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// bSearch
 			// 
+			this->bSearch->AutoSize = true;
 			this->bSearch->Location = System::Drawing::Point(23, 28);
 			this->bSearch->Name = L"bSearch";
 			this->bSearch->Size = System::Drawing::Size(68, 34);

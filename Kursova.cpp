@@ -450,6 +450,19 @@ System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System
 	{
 		this->Controls[i]->ForeColor = System::Drawing::Color::Gray;
 	}
+	//зміна кольору усіх кнопок і загалом 
+	for (int i = 0; i < this->Controls->Count; i++)
+	{
+		if (this->Controls[i]->GetType() == System::Windows::Forms::Button::typeid)
+		{
+			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+		}
+		if (this->Controls[i]->GetType() == System::Windows::Forms::MenuStrip::typeid)
+		{
+			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+		}
+
+	}
 	return System::Void();
 }
 
