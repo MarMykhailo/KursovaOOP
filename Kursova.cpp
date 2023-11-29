@@ -400,5 +400,11 @@ System::Void KursovaOOP::Kursova::tsmiSearch_Click(System::Object^ sender, Syste
 	return System::Void();
 }
 
+System::Void KursovaOOP::Kursova::cmsClear_Click(System::Object^ sender, System::EventArgs^ e)
+{
+	Current->clear();
+	return System::Void();
+}
+
 
 

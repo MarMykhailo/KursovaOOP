@@ -27,6 +27,38 @@ namespace KursovaOOP {
 
 	private: System::Windows::Forms::ToolStripTextBox^ tstbDuration;
 	private: System::Windows::Forms::ToolStripTextBox^ cmstbDuration;
+	private: System::Windows::Forms::ToolStripMenuItem^ cmsClear;
+	private: System::Windows::Forms::ToolStripMenuItem^ cmsEdit;
+	private: System::Windows::Forms::ToolStripMenuItem^ tsddmSelect;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbSelect;
+
+
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbSongers;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbName;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbAlbom;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbYear;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbDuration;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbFormat;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbSize;
+	private: System::Windows::Forms::ToolStripTextBox^ tsddmtbIsImport;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	public:
@@ -343,6 +375,17 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmstbFormat = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->cmstbSize = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->cmstbIsImport = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmsEdit = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsddmSelect = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->tsddmtbSelect = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbSongers = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbName = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbAlbom = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbYear = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbDuration = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbFormat = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbSize = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->tsddmtbIsImport = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->cmsDelete = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->cmstbDelete = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->tsmiSearch = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -354,6 +397,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->tstbFormat = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->tstbSize = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->tstbIsImport = (gcnew System::Windows::Forms::ToolStripTextBox());
+			this->cmsClear = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->ttTip = (gcnew System::Windows::Forms::ToolTip(this->components));
 			this->gbMenu->SuspendLayout();
 			this->gbIterface->SuspendLayout();
@@ -559,7 +603,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// mstbNameFileIn
 			// 
-			this->mstbNameFileIn->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->mstbNameFileIn->Name = L"mstbNameFileIn";
 			this->mstbNameFileIn->Size = System::Drawing::Size(100, 27);
 			// 
@@ -573,13 +616,11 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// mstbNameFileOut
 			// 
-			this->mstbNameFileOut->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->mstbNameFileOut->Name = L"mstbNameFileOut";
 			this->mstbNameFileOut->Size = System::Drawing::Size(100, 27);
 			// 
 			// mstbFileNameInOut
 			// 
-			this->mstbFileNameInOut->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->mstbFileNameInOut->Name = L"mstbFileNameInOut";
 			this->mstbFileNameInOut->Size = System::Drawing::Size(100, 27);
 			// 
@@ -596,70 +637,70 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// tsmiSSonger
 			// 
 			this->tsmiSSonger->Name = L"tsmiSSonger";
-			this->tsmiSSonger->Size = System::Drawing::Size(186, 26);
+			this->tsmiSSonger->Size = System::Drawing::Size(224, 26);
 			this->tsmiSSonger->Text = L"Виконавець\\і";
 			this->tsmiSSonger->Click += gcnew System::EventHandler(this, &Kursova::tsmiSSonger_Click);
 			// 
 			// tsmiSName
 			// 
 			this->tsmiSName->Name = L"tsmiSName";
-			this->tsmiSName->Size = System::Drawing::Size(186, 26);
+			this->tsmiSName->Size = System::Drawing::Size(224, 26);
 			this->tsmiSName->Text = L"Назва";
 			this->tsmiSName->Click += gcnew System::EventHandler(this, &Kursova::tsmiSName_Click);
 			// 
 			// tsmiSAlbom
 			// 
 			this->tsmiSAlbom->Name = L"tsmiSAlbom";
-			this->tsmiSAlbom->Size = System::Drawing::Size(186, 26);
+			this->tsmiSAlbom->Size = System::Drawing::Size(224, 26);
 			this->tsmiSAlbom->Text = L"Альбом";
 			this->tsmiSAlbom->Click += gcnew System::EventHandler(this, &Kursova::tsmiSAlbom_Click);
 			// 
 			// tsmiSYear
 			// 
 			this->tsmiSYear->Name = L"tsmiSYear";
-			this->tsmiSYear->Size = System::Drawing::Size(186, 26);
+			this->tsmiSYear->Size = System::Drawing::Size(224, 26);
 			this->tsmiSYear->Text = L"Рік";
 			this->tsmiSYear->Click += gcnew System::EventHandler(this, &Kursova::tsmiSYear_Click);
 			// 
 			// tsmiSDuration
 			// 
 			this->tsmiSDuration->Name = L"tsmiSDuration";
-			this->tsmiSDuration->Size = System::Drawing::Size(186, 26);
+			this->tsmiSDuration->Size = System::Drawing::Size(224, 26);
 			this->tsmiSDuration->Text = L"Тривалість";
 			this->tsmiSDuration->Click += gcnew System::EventHandler(this, &Kursova::tsmiSDuration_Click);
 			// 
 			// tsmiSFormat
 			// 
 			this->tsmiSFormat->Name = L"tsmiSFormat";
-			this->tsmiSFormat->Size = System::Drawing::Size(186, 26);
+			this->tsmiSFormat->Size = System::Drawing::Size(224, 26);
 			this->tsmiSFormat->Text = L"Формат";
 			this->tsmiSFormat->Click += gcnew System::EventHandler(this, &Kursova::tsmiSFormat_Click);
 			// 
 			// tsmiSSize
 			// 
 			this->tsmiSSize->Name = L"tsmiSSize";
-			this->tsmiSSize->Size = System::Drawing::Size(186, 26);
+			this->tsmiSSize->Size = System::Drawing::Size(224, 26);
 			this->tsmiSSize->Text = L"Розмір";
 			this->tsmiSSize->Click += gcnew System::EventHandler(this, &Kursova::tsmiSSize_Click);
 			// 
 			// tsmiSImport
 			// 
 			this->tsmiSImport->Name = L"tsmiSImport";
-			this->tsmiSImport->Size = System::Drawing::Size(186, 26);
+			this->tsmiSImport->Size = System::Drawing::Size(224, 26);
 			this->tsmiSImport->Text = L"Зарубіжна";
 			this->tsmiSImport->Click += gcnew System::EventHandler(this, &Kursova::tsmiSImport_Click);
 			// 
 			// cmsMenu
 			// 
 			this->cmsMenu->ImageScalingSize = System::Drawing::Size(20, 20);
-			this->cmsMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->cmsAdd, this->cmsDelete,
-					this->tsmiSearch
+			this->cmsMenu->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->cmsAdd, this->cmsEdit,
+					this->cmsDelete, this->tsmiSearch, this->cmsClear
 			});
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(186, 104);
+			this->cmsMenu->Size = System::Drawing::Size(186, 152);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsAdd
@@ -677,7 +718,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// cmstbSongers
 			// 
 			this->cmstbSongers->AutoToolTip = true;
-			this->cmstbSongers->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbSongers->Name = L"cmstbSongers";
 			this->cmstbSongers->Size = System::Drawing::Size(100, 27);
 			this->cmstbSongers->Tag = L"";
@@ -685,52 +725,126 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// cmstbName
 			// 
-			this->cmstbName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbName->Name = L"cmstbName";
 			this->cmstbName->Size = System::Drawing::Size(100, 27);
 			this->cmstbName->ToolTipText = L"Назва";
 			// 
 			// cmstbAlbom
 			// 
-			this->cmstbAlbom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbAlbom->Name = L"cmstbAlbom";
 			this->cmstbAlbom->Size = System::Drawing::Size(100, 27);
 			this->cmstbAlbom->ToolTipText = L"Альбом";
 			// 
 			// cmstbYear
 			// 
-			this->cmstbYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbYear->Name = L"cmstbYear";
 			this->cmstbYear->Size = System::Drawing::Size(100, 27);
 			this->cmstbYear->ToolTipText = L"Рік";
 			// 
 			// cmstbDuration
 			// 
-			this->cmstbDuration->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbDuration->Name = L"cmstbDuration";
 			this->cmstbDuration->Size = System::Drawing::Size(100, 27);
 			this->cmstbDuration->ToolTipText = L"Тривалість (хв)";
 			// 
 			// cmstbFormat
 			// 
-			this->cmstbFormat->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbFormat->Name = L"cmstbFormat";
 			this->cmstbFormat->Size = System::Drawing::Size(100, 27);
 			this->cmstbFormat->ToolTipText = L"Формат";
 			// 
 			// cmstbSize
 			// 
-			this->cmstbSize->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbSize->Name = L"cmstbSize";
 			this->cmstbSize->Size = System::Drawing::Size(100, 27);
 			this->cmstbSize->ToolTipText = L"Розмір";
 			// 
 			// cmstbIsImport
 			// 
-			this->cmstbIsImport->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbIsImport->Name = L"cmstbIsImport";
 			this->cmstbIsImport->Size = System::Drawing::Size(100, 27);
 			this->cmstbIsImport->ToolTipText = L"Зарубіжна\? (Так\\Ні)";
+			// 
+			// cmsEdit
+			// 
+			this->cmsEdit->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(9) {
+				this->tsddmSelect,
+					this->tsddmtbSongers, this->tsddmtbName, this->tsddmtbAlbom, this->tsddmtbYear, this->tsddmtbDuration, this->tsddmtbFormat, this->tsddmtbSize,
+					this->tsddmtbIsImport
+			});
+			this->cmsEdit->Name = L"cmsEdit";
+			this->cmsEdit->Size = System::Drawing::Size(185, 24);
+			this->cmsEdit->Text = L"Редагувати";
+			// 
+			// tsddmSelect
+			// 
+			this->tsddmSelect->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsddmtbSelect });
+			this->tsddmSelect->Name = L"tsddmSelect";
+			this->tsddmSelect->Size = System::Drawing::Size(224, 26);
+			this->tsddmSelect->Text = L"Вибрати";
+			// 
+			// tsddmtbSelect
+			// 
+			this->tsddmtbSelect->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbSelect->Name = L"tsddmtbSelect";
+			this->tsddmtbSelect->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbSelect->ToolTipText = L"Індекс";
+			// 
+			// tsddmtbSongers
+			// 
+			this->tsddmtbSongers->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbSongers->Name = L"tsddmtbSongers";
+			this->tsddmtbSongers->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbSongers->ToolTipText = L"Виконавець\\і";
+			// 
+			// tsddmtbName
+			// 
+			this->tsddmtbName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbName->Name = L"tsddmtbName";
+			this->tsddmtbName->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbName->ToolTipText = L"Назва";
+			// 
+			// tsddmtbAlbom
+			// 
+			this->tsddmtbAlbom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbAlbom->Name = L"tsddmtbAlbom";
+			this->tsddmtbAlbom->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbAlbom->ToolTipText = L"Альбом";
+			// 
+			// tsddmtbYear
+			// 
+			this->tsddmtbYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbYear->Name = L"tsddmtbYear";
+			this->tsddmtbYear->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbYear->ToolTipText = L"Рік";
+			// 
+			// tsddmtbDuration
+			// 
+			this->tsddmtbDuration->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbDuration->Name = L"tsddmtbDuration";
+			this->tsddmtbDuration->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbDuration->ToolTipText = L"Тривалість";
+			// 
+			// tsddmtbFormat
+			// 
+			this->tsddmtbFormat->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbFormat->Name = L"tsddmtbFormat";
+			this->tsddmtbFormat->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbFormat->ToolTipText = L"Формат";
+			// 
+			// tsddmtbSize
+			// 
+			this->tsddmtbSize->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbSize->Name = L"tsddmtbSize";
+			this->tsddmtbSize->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbSize->ToolTipText = L"Розмір";
+			// 
+			// tsddmtbIsImport
+			// 
+			this->tsddmtbIsImport->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
+			this->tsddmtbIsImport->Name = L"tsddmtbIsImport";
+			this->tsddmtbIsImport->Size = System::Drawing::Size(100, 27);
+			this->tsddmtbIsImport->ToolTipText = L"Зарубіжна(Так\\Ні)";
 			// 
 			// cmsDelete
 			// 
@@ -742,7 +856,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// cmstbDelete
 			// 
-			this->cmstbDelete->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->cmstbDelete->Name = L"cmstbDelete";
 			this->cmstbDelete->Size = System::Drawing::Size(100, 27);
 			this->cmstbDelete->ToolTipText = L"Індекс елемента який треба видалити";
@@ -760,59 +873,58 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			// tstbSongers
 			// 
-			this->tstbSongers->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbSongers->Name = L"tstbSongers";
 			this->tstbSongers->Size = System::Drawing::Size(100, 27);
 			this->tstbSongers->ToolTipText = L"Виконавець\\ці";
 			// 
 			// tstbName
 			// 
-			this->tstbName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbName->Name = L"tstbName";
 			this->tstbName->Size = System::Drawing::Size(100, 27);
 			this->tstbName->ToolTipText = L"Назва";
 			// 
 			// tstbAlbom
 			// 
-			this->tstbAlbom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbAlbom->Name = L"tstbAlbom";
 			this->tstbAlbom->Size = System::Drawing::Size(100, 27);
 			this->tstbAlbom->ToolTipText = L"Альбом";
 			// 
 			// tstbYear
 			// 
-			this->tstbYear->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbYear->Name = L"tstbYear";
 			this->tstbYear->Size = System::Drawing::Size(100, 27);
 			this->tstbYear->ToolTipText = L"Рік";
 			// 
 			// tstbDuration
 			// 
-			this->tstbDuration->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbDuration->Name = L"tstbDuration";
 			this->tstbDuration->Size = System::Drawing::Size(100, 27);
 			this->tstbDuration->ToolTipText = L"Тривалість (хв)";
 			// 
 			// tstbFormat
 			// 
-			this->tstbFormat->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbFormat->Name = L"tstbFormat";
 			this->tstbFormat->Size = System::Drawing::Size(100, 27);
 			this->tstbFormat->ToolTipText = L"Формат";
 			// 
 			// tstbSize
 			// 
-			this->tstbSize->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbSize->Name = L"tstbSize";
 			this->tstbSize->Size = System::Drawing::Size(100, 27);
 			this->tstbSize->ToolTipText = L"Розмір";
 			// 
 			// tstbIsImport
 			// 
-			this->tstbIsImport->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->tstbIsImport->Name = L"tstbIsImport";
 			this->tstbIsImport->Size = System::Drawing::Size(100, 27);
 			this->tstbIsImport->ToolTipText = L"Зарубіжна (Так\\Ні)";
+			// 
+			// cmsClear
+			// 
+			this->cmsClear->Name = L"cmsClear";
+			this->cmsClear->Size = System::Drawing::Size(185, 24);
+			this->cmsClear->Text = L"Очистити ";
+			this->cmsClear->Click += gcnew System::EventHandler(this, &Kursova::cmsClear_Click);
 			// 
 			// Kursova
 			// 
@@ -855,5 +967,6 @@ private: System::Void tlpTable_PreviewKeyDown(System::Object^ sender, System::Wi
 private: System::Void cmsAdd_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void bSearch_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiSearch_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void cmsClear_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }
