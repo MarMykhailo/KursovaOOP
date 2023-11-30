@@ -208,7 +208,7 @@ private: System::Windows::Forms::ToolStripMenuItem^ msFile;
 private: System::Windows::Forms::ToolStripMenuItem^ msbFileIn;
 private: System::Windows::Forms::ToolStripMenuItem^ msbFileOut;
 
-private: System::Windows::Forms::ToolStripTextBox^ mstbFileNameInOut;
+
 
 private: System::Windows::Forms::ToolStripTextBox^ mstbNameFileIn;
 private: System::Windows::Forms::ToolStripTextBox^ mstbNameFileOut;
@@ -370,7 +370,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->mstbNameFileIn = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->msbFileOut = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->mstbNameFileOut = (gcnew System::Windows::Forms::ToolStripTextBox());
-			this->mstbFileNameInOut = (gcnew System::Windows::Forms::ToolStripTextBox());
 			this->msSort = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSSonger = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->tsmiSName = (gcnew System::Windows::Forms::ToolStripMenuItem());
@@ -601,26 +600,23 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			});
 			this->tbMenu->Location = System::Drawing::Point(0, 0);
 			this->tbMenu->Name = L"tbMenu";
-			this->tbMenu->Size = System::Drawing::Size(602, 27);
+			this->tbMenu->Size = System::Drawing::Size(602, 31);
 			this->tbMenu->TabIndex = 2;
 			this->tbMenu->Text = L"toolStrip1";
 			// 
 			// msFile
 			// 
-			this->msFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
-				this->msbFileIn, this->msbFileOut,
-					this->mstbFileNameInOut
-			});
+			this->msFile->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) { this->msbFileIn, this->msbFileOut });
 			this->msFile->Name = L"msFile";
-			this->msFile->Size = System::Drawing::Size(59, 27);
+			this->msFile->Size = System::Drawing::Size(59, 31);
 			this->msFile->Text = L"Файл";
 			// 
 			// msbFileIn
 			// 
 			this->msbFileIn->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->mstbNameFileIn });
 			this->msbFileIn->Name = L"msbFileIn";
-			this->msbFileIn->Size = System::Drawing::Size(188, 26);
-			this->msbFileIn->Text = L"Вивід з файла";
+			this->msbFileIn->Size = System::Drawing::Size(224, 26);
+			this->msbFileIn->Text = L"Зчитати";
 			this->msbFileIn->Click += gcnew System::EventHandler(this, &Kursova::msbFileIn_Click);
 			// 
 			// mstbNameFileIn
@@ -633,8 +629,8 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			this->msbFileOut->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->mstbNameFileOut });
 			this->msbFileOut->Name = L"msbFileOut";
-			this->msbFileOut->Size = System::Drawing::Size(188, 26);
-			this->msbFileOut->Text = L"Ввід у файл";
+			this->msbFileOut->Size = System::Drawing::Size(224, 26);
+			this->msbFileOut->Text = L"Записати";
 			this->msbFileOut->Click += gcnew System::EventHandler(this, &Kursova::msbFileOut_Click);
 			// 
 			// mstbNameFileOut
@@ -642,12 +638,6 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->mstbNameFileOut->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
 			this->mstbNameFileOut->Name = L"mstbNameFileOut";
 			this->mstbNameFileOut->Size = System::Drawing::Size(100, 27);
-			// 
-			// mstbFileNameInOut
-			// 
-			this->mstbFileNameInOut->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9));
-			this->mstbFileNameInOut->Name = L"mstbFileNameInOut";
-			this->mstbFileNameInOut->Size = System::Drawing::Size(100, 27);
 			// 
 			// msSort
 			// 
@@ -725,7 +715,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->tsddbStyle->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsddbStyle.Image")));
 			this->tsddbStyle->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->tsddbStyle->Name = L"tsddbStyle";
-			this->tsddbStyle->Size = System::Drawing::Size(63, 24);
+			this->tsddbStyle->Size = System::Drawing::Size(63, 28);
 			this->tsddbStyle->Text = L"Стиль";
 			// 
 			// tsmiFont
@@ -752,7 +742,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(186, 152);
+			this->cmsMenu->Size = System::Drawing::Size(177, 124);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsAdd
@@ -762,7 +752,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->cmstbName, this->cmstbAlbom, this->cmstbYear, this->cmstbDuration, this->cmstbFormat, this->cmstbSize, this->cmstbIsImport
 			});
 			this->cmsAdd->Name = L"cmsAdd";
-			this->cmsAdd->Size = System::Drawing::Size(185, 24);
+			this->cmsAdd->Size = System::Drawing::Size(176, 24);
 			this->cmsAdd->Text = L"Додати";
 			this->cmsAdd->ToolTipText = L"Натиснікть коли дадасте всю наявну інормацію";
 			this->cmsAdd->Click += gcnew System::EventHandler(this, &Kursova::cmsAdd_Click);
@@ -833,7 +823,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tsddmtbIsImport
 			});
 			this->cmsEdit->Name = L"cmsEdit";
-			this->cmsEdit->Size = System::Drawing::Size(185, 24);
+			this->cmsEdit->Size = System::Drawing::Size(176, 24);
 			this->cmsEdit->Text = L"Редагувати";
 			this->cmsEdit->Click += gcnew System::EventHandler(this, &Kursova::cmsEdit_Click);
 			// 
@@ -841,7 +831,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			this->tsddmSelect->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsddmtbSelect });
 			this->tsddmSelect->Name = L"tsddmSelect";
-			this->tsddmSelect->Size = System::Drawing::Size(224, 26);
+			this->tsddmSelect->Size = System::Drawing::Size(174, 26);
 			this->tsddmSelect->Text = L"Вибрати";
 			this->tsddmSelect->Click += gcnew System::EventHandler(this, &Kursova::tsddmSelect_Click);
 			// 
@@ -912,7 +902,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			this->cmsDelete->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmstbDelete });
 			this->cmsDelete->Name = L"cmsDelete";
-			this->cmsDelete->Size = System::Drawing::Size(185, 24);
+			this->cmsDelete->Size = System::Drawing::Size(176, 24);
 			this->cmsDelete->Text = L"Видалити";
 			this->cmsDelete->Click += gcnew System::EventHandler(this, &Kursova::cmsDelete_Click);
 			// 
@@ -930,7 +920,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tstbName, this->tstbAlbom, this->tstbYear, this->tstbDuration, this->tstbFormat, this->tstbSize, this->tstbIsImport
 			});
 			this->tsmiSearch->Name = L"tsmiSearch";
-			this->tsmiSearch->Size = System::Drawing::Size(185, 24);
+			this->tsmiSearch->Size = System::Drawing::Size(176, 24);
 			this->tsmiSearch->Text = L"Детальний пошук";
 			this->tsmiSearch->Click += gcnew System::EventHandler(this, &Kursova::tsmiSearch_Click);
 			// 
@@ -993,7 +983,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// cmsClear
 			// 
 			this->cmsClear->Name = L"cmsClear";
-			this->cmsClear->Size = System::Drawing::Size(185, 24);
+			this->cmsClear->Size = System::Drawing::Size(176, 24);
 			this->cmsClear->Text = L"Очистити ";
 			this->cmsClear->Click += gcnew System::EventHandler(this, &Kursova::cmsClear_Click);
 			// 

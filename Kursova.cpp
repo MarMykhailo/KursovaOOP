@@ -6,8 +6,6 @@
 
 System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	//беру назу файла і додаю до ньоо .txt
-	//записую в файл
 	System::String^ managedString = mstbNameFileOut->Text;
 	std::wstring stdString = msclr::interop::marshal_as<std::wstring>(managedString) + L".txt";
 
@@ -476,7 +474,17 @@ System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System
 	// Iterate through all controls on the form and set the background and text color
 	for each (Control ^ control in this->Controls)
 	{
-		control->BackColor = colorDialog->Color;
+		if (dynamic_cast<TextBox^>(control) != nullptr)
+		{
+			// Set TextBox background color to white
+			control->BackColor = System::Drawing::Color::White;
+		}
+		else
+		{
+			// Set other controls' background color to the chosen color
+			control->BackColor = colorDialog->Color;
+		}
+
 		control->ForeColor = textColor;
 	}
 
@@ -526,9 +534,6 @@ System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System
 	return System::Void();
 }
 
-
-
-
 System::Void KursovaOOP::Kursova::tsddmSelect_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	System::String^ text = tsddmtbSelect->Text;
@@ -565,6 +570,7 @@ System::Void KursovaOOP::Kursova::tsddmSelect_Click(System::Object^ sender, Syst
 
 	return System::Void();
 }
+
 System::Void KursovaOOP::Kursova::cmsEdit_Click(System::Object^ sender, System::EventArgs^ e)
 {
 
