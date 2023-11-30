@@ -138,6 +138,7 @@
     <ClInclude Include="Kursova.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="ProgressForm.h" />
     <ClInclude Include="Song.h" />
     <ClInclude Include="QuickSort.h" />
   </ItemGroup>

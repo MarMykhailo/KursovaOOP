@@ -3,7 +3,6 @@
 #include <codecvt>
 #include <msclr/marshal_cppstd.h>
 
-
 System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, System::EventArgs^ e)
 {
 	System::String^ managedString = mstbNameFileOut->Text;
@@ -55,62 +54,108 @@ System::Void KursovaOOP::Kursova::msbFileIn_Click(System::Object^ sender, System
 	return System::Void();
 }
 
-System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
+void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
 {
-    // Очистити TableLayoutPanel
-    tlpTable->Controls->Clear();
 
-    // Додати лейбли для заголовків
-    tlpTable->Controls->Add(lNumber, 0, 0);
-    tlpTable->Controls->Add(lSonger, 1, 0);
-    tlpTable->Controls->Add(lName, 2, 0);
-    tlpTable->Controls->Add(lAlbom, 3, 0);
-    tlpTable->Controls->Add(lYear, 4, 0);
+	// Create an instance of ProgressForm
+	Form^ progressForm = gcnew Form();
+
+	// Add progress bar and label
+	Label^ lProgress = gcnew Label();
+	lProgress->Text = L"Оновлення...";
+	lProgress->AutoSize = true;
+	lProgress->Location = System::Drawing::Point(10, 10);
+	progressForm->Controls->Add(lProgress);
+
+	ProgressBar^ progressBar = gcnew ProgressBar();
+	progressBar->Minimum = 0;
+	progressBar->Maximum = DList.getSize(); // Set the maximum value
+	progressBar->Step = 1; // Set the step value
+	progressBar->Value = 0; // Set the initial value
+	progressBar->Location = System::Drawing::Point(10, 30);
+	progressBar->Width = 200; // Set the width
+	progressForm->Controls->Add(progressBar);
+
+	// Set the size of the progress form
+	progressForm->Width = 240;
+	progressForm->Height = 120;
+
+	System::Drawing::Point formLocation = this->Location;
+	formLocation.X += (this->Width - progressForm->Width) / 2;
+	formLocation.Y += (this->Height - progressForm->Height) / 2;
+	// Set the location of the progress form in the center of the main form
+	progressForm->Location = formLocation;
+	//позбавляю кнопок
+	progressForm->ControlBox = false;
+	progressForm->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedDialog;
+	progressForm->ShowIcon = false;
+	progressForm->ShowInTaskbar = false;
+	progressForm->StartPosition = System::Windows::Forms::FormStartPosition::Manual;
+	progressForm->TopMost = true;
+
+	// Show the progress form
+	progressForm->Show();
+
+	// Очистити TableLayoutPanel
+	tlpTable->Controls->Clear();
+
+	// Додати лейбли для заголовків
+	tlpTable->Controls->Add(lNumber, 0, 0);
+	tlpTable->Controls->Add(lSonger, 1, 0);
+	tlpTable->Controls->Add(lName, 2, 0);
+	tlpTable->Controls->Add(lAlbom, 3, 0);
+	tlpTable->Controls->Add(lYear, 4, 0);
 	tlpTable->Controls->Add(lDuration, 5, 0);
-    tlpTable->Controls->Add(lFormat, 6, 0);
-    tlpTable->Controls->Add(lSize, 7, 0);
-    tlpTable->Controls->Add(lIsImport, 8, 0);
+	tlpTable->Controls->Add(lFormat, 6, 0);
+	tlpTable->Controls->Add(lSize, 7, 0);
+	tlpTable->Controls->Add(lIsImport, 8, 0);
 
-    // Додати дані про пісні
-    for (int i = 0; i < DList.getSize(); i++) {
-        auto currentSong = DList[i];
+	// Додати дані про пісні
+	int DListSize = DList.getSize(); // Cache the size to avoid multiple calls
+	if (DListSize > 0) {
+		for (int i = 0; i < DListSize; i++) {
+			auto currentSong = DList[i];
 
-        Label^ numberLabel = gcnew Label();
-        numberLabel->Text = (i + 1).ToString();
-        numberLabel->AutoSize = true;
-        tlpTable->Controls->Add(numberLabel, 0, i + 1);
+			// Update progress bar value
+			progressBar->Value = i + 1;
 
-        std::wstring allSongers;
-        for (int j = 0; j < currentSong.getSongers().size(); j++) {
-            if (j > 0) {
-                allSongers += L", ";
-            }
-            allSongers += currentSong.getSongers()[j];
-        }
 
-        Label^ songerLabel = gcnew Label();
-        songerLabel->Text = gcnew String(allSongers.c_str());
-        songerLabel->AutoSize = true;
-        songerLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);  
-        tlpTable->Controls->Add(songerLabel, 1, i + 1);
+		Label^ numberLabel = gcnew Label();
+		numberLabel->Text = (i + 1).ToString();
+		numberLabel->AutoSize = true;
+		tlpTable->Controls->Add(numberLabel, 0, i + 1);
 
-        Label^ nameLabel = gcnew Label();
-        nameLabel->Text = gcnew String(currentSong.getName().c_str());
-        nameLabel->AutoSize = true;
-        nameLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(nameLabel, 2, i + 1);
+		std::wstring allSongers;
+		for (int j = 0; j < currentSong.getSongers().size(); j++) {
+			if (j > 0) {
+				allSongers += L", ";
+			}
+			allSongers += currentSong.getSongers()[j];
+		}
 
-        Label^ albomLabel = gcnew Label();
-        albomLabel->Text = gcnew String(currentSong.getAlbom().c_str());
-        albomLabel->AutoSize = true;
-        albomLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(albomLabel, 3, i + 1);
+		Label^ songerLabel = gcnew Label();
+		songerLabel->Text = gcnew String(allSongers.c_str());
+		songerLabel->AutoSize = true;
+		songerLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(songerLabel, 1, i + 1);
 
-        Label^ yearLabel = gcnew Label();
-        yearLabel->Text = currentSong.getYear().ToString();
-        yearLabel->AutoSize = true;
-        yearLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(yearLabel, 4, i + 1);
+		Label^ nameLabel = gcnew Label();
+		nameLabel->Text = gcnew String(currentSong.getName().c_str());
+		nameLabel->AutoSize = true;
+		nameLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(nameLabel, 2, i + 1);
+
+		Label^ albomLabel = gcnew Label();
+		albomLabel->Text = gcnew String(currentSong.getAlbom().c_str());
+		albomLabel->AutoSize = true;
+		albomLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(albomLabel, 3, i + 1);
+
+		Label^ yearLabel = gcnew Label();
+		yearLabel->Text = currentSong.getYear().ToString();
+		yearLabel->AutoSize = true;
+		yearLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(yearLabel, 4, i + 1);
 
 		Label^ durationLabel = gcnew Label();
 		durationLabel->Text = currentSong.getDuration().ToString();
@@ -118,30 +163,39 @@ System::Void KursovaOOP::Kursova::UpdateTable(Dlist<Song>& DList)
 		durationLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
 		tlpTable->Controls->Add(durationLabel, 5, i + 1);
 
-        Label^ formatLabel = gcnew Label();
-        formatLabel->Text = gcnew String(currentSong.getFormat().c_str());
-        formatLabel->AutoSize = true;
-        formatLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(formatLabel, 6, i + 1);
+		Label^ formatLabel = gcnew Label();
+		formatLabel->Text = gcnew String(currentSong.getFormat().c_str());
+		formatLabel->AutoSize = true;
+		formatLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(formatLabel, 6, i + 1);
 
-        Label^ sizeLabel = gcnew Label();
-        sizeLabel->Text = currentSong.getSize().ToString();
-        sizeLabel->AutoSize = true;
-        sizeLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(sizeLabel, 7, i + 1);
+		Label^ sizeLabel = gcnew Label();
+		sizeLabel->Text = currentSong.getSize().ToString();
+		sizeLabel->AutoSize = true;
+		sizeLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(sizeLabel, 7, i + 1);
 
-        Label^ isImportLabel = gcnew Label();
-        isImportLabel->Text = currentSong.getIsImport() ? L"Так" : L"Ні";
-        isImportLabel->AutoSize = true;
-        isImportLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
-        tlpTable->Controls->Add(isImportLabel, 8, i + 1);
-    }
+		Label^ isImportLabel = gcnew Label();
+		isImportLabel->Text = currentSong.getIsImport() ? L"Так" : L"Ні";
+		isImportLabel->AutoSize = true;
+		isImportLabel->Click += gcnew System::EventHandler(this, &Kursova::tlpTable_Click);
+		tlpTable->Controls->Add(isImportLabel, 8, i + 1);
+		//System::Threading::Thread::Sleep(50);
 
-    // Встановити авто розмір для колонок і рядків
-    tlpTable->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
-    tlpTable->AutoScroll = true;
-    tlpTable->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowOnly;
+		// Refresh the progress form to update the display
+		Application::DoEvents();
+		}
+	}
+
+	// Close the progress form after completion
+	progressForm->Close();
+
+	// Встановити авто розмір для колонок і рядків
+	tlpTable->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowAndShrink;
+	tlpTable->AutoScroll = true;
+	tlpTable->AutoSizeMode = System::Windows::Forms::AutoSizeMode::GrowOnly;
 }
+
 
 System::Void KursovaOOP::Kursova::tsmiSSonger_Click(System::Object^ sender, System::EventArgs^ e)
 {

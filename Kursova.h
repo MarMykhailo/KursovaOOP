@@ -742,7 +742,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(186, 152);
+			this->cmsMenu->Size = System::Drawing::Size(177, 124);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsAdd

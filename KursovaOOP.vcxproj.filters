@@ -53,5 +53,8 @@
     <ClInclude Include="Compare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ProgressForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
