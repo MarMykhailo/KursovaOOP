@@ -731,14 +731,14 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// tsmiFont
 			// 
 			this->tsmiFont->Name = L"tsmiFont";
-			this->tsmiFont->Size = System::Drawing::Size(224, 26);
+			this->tsmiFont->Size = System::Drawing::Size(140, 26);
 			this->tsmiFont->Text = L"Шрифт";
 			this->tsmiFont->Click += gcnew System::EventHandler(this, &Kursova::tsmiFont_Click);
 			// 
 			// tsmiTheme
 			// 
 			this->tsmiTheme->Name = L"tsmiTheme";
-			this->tsmiTheme->Size = System::Drawing::Size(224, 26);
+			this->tsmiTheme->Size = System::Drawing::Size(140, 26);
 			this->tsmiTheme->Text = L"Тема";
 			this->tsmiTheme->Click += gcnew System::EventHandler(this, &Kursova::tsmiTheme_Click);
 			// 
@@ -752,7 +752,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(177, 124);
+			this->cmsMenu->Size = System::Drawing::Size(186, 152);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsAdd
@@ -762,7 +762,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->cmstbName, this->cmstbAlbom, this->cmstbYear, this->cmstbDuration, this->cmstbFormat, this->cmstbSize, this->cmstbIsImport
 			});
 			this->cmsAdd->Name = L"cmsAdd";
-			this->cmsAdd->Size = System::Drawing::Size(176, 24);
+			this->cmsAdd->Size = System::Drawing::Size(185, 24);
 			this->cmsAdd->Text = L"Додати";
 			this->cmsAdd->ToolTipText = L"Натиснікть коли дадасте всю наявну інормацію";
 			this->cmsAdd->Click += gcnew System::EventHandler(this, &Kursova::cmsAdd_Click);
@@ -833,15 +833,17 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tsddmtbIsImport
 			});
 			this->cmsEdit->Name = L"cmsEdit";
-			this->cmsEdit->Size = System::Drawing::Size(176, 24);
+			this->cmsEdit->Size = System::Drawing::Size(185, 24);
 			this->cmsEdit->Text = L"Редагувати";
+			this->cmsEdit->Click += gcnew System::EventHandler(this, &Kursova::cmsEdit_Click);
 			// 
 			// tsddmSelect
 			// 
 			this->tsddmSelect->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsddmtbSelect });
 			this->tsddmSelect->Name = L"tsddmSelect";
-			this->tsddmSelect->Size = System::Drawing::Size(174, 26);
+			this->tsddmSelect->Size = System::Drawing::Size(224, 26);
 			this->tsddmSelect->Text = L"Вибрати";
+			this->tsddmSelect->Click += gcnew System::EventHandler(this, &Kursova::tsddmSelect_Click);
 			// 
 			// tsddmtbSelect
 			// 
@@ -910,7 +912,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			this->cmsDelete->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmstbDelete });
 			this->cmsDelete->Name = L"cmsDelete";
-			this->cmsDelete->Size = System::Drawing::Size(176, 24);
+			this->cmsDelete->Size = System::Drawing::Size(185, 24);
 			this->cmsDelete->Text = L"Видалити";
 			this->cmsDelete->Click += gcnew System::EventHandler(this, &Kursova::cmsDelete_Click);
 			// 
@@ -928,7 +930,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tstbName, this->tstbAlbom, this->tstbYear, this->tstbDuration, this->tstbFormat, this->tstbSize, this->tstbIsImport
 			});
 			this->tsmiSearch->Name = L"tsmiSearch";
-			this->tsmiSearch->Size = System::Drawing::Size(176, 24);
+			this->tsmiSearch->Size = System::Drawing::Size(185, 24);
 			this->tsmiSearch->Text = L"Детальний пошук";
 			this->tsmiSearch->Click += gcnew System::EventHandler(this, &Kursova::tsmiSearch_Click);
 			// 
@@ -991,7 +993,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// cmsClear
 			// 
 			this->cmsClear->Name = L"cmsClear";
-			this->cmsClear->Size = System::Drawing::Size(176, 24);
+			this->cmsClear->Size = System::Drawing::Size(185, 24);
 			this->cmsClear->Text = L"Очистити ";
 			this->cmsClear->Click += gcnew System::EventHandler(this, &Kursova::cmsClear_Click);
 			// 
@@ -1039,7 +1041,7 @@ private: System::Void tsmiSearch_Click(System::Object^ sender, System::EventArgs
 private: System::Void cmsClear_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiFont_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void tsmiTheme_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void tsmiDarck_Click(System::Object^ sender, System::EventArgs^ e);
-private: System::Void tsmiLight_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void tsddmSelect_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void cmsEdit_Click(System::Object^ sender, System::EventArgs^ e);
 };
 }

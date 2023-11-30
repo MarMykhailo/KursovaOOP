@@ -1,6 +1,7 @@
 ﻿#include "Kursova.h"
 #include <locale>
 #include <codecvt>
+#include <msclr/marshal_cppstd.h>
 
 
 System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, System::EventArgs^ e)
@@ -23,6 +24,10 @@ System::Void KursovaOOP::Kursova::msbFileOut_Click(System::Object^ sender, Syste
 		out << *Current;
         out.close();
 	}
+
+
+
+
 	return System::Void();
 }
 
@@ -410,27 +415,43 @@ System::Void KursovaOOP::Kursova::tsmiFont_Click(System::Object^ sender, System:
 {
 	FontDialog^ fontDialog = gcnew FontDialog();
 	fontDialog->ShowDialog();
-	tlpTable->Font = fontDialog->Font;//
-	//Встановлення шрифта для всіх елементів Kursova в циклі
 
-	for (int i = 0; i < this->Controls->Count; i++)
+	// Set font for the table layout panel
+	tlpTable->Font = fontDialog->Font;
+
+	// Iterate through all controls on the form and set the font
+	for each (Control ^ control in this->Controls)
 	{
-		this->Controls[i]->Font = fontDialog->Font;
+		control->Font = fontDialog->Font;
 	}
-	//перевірка чи шрифт є не завеликий (не більше 12)
+
+	// Iterate through items in the context menu and set the font
+	for each (ToolStripItem ^ item in cmsMenu->Items)
+	{
+		item->Font = fontDialog->Font;
+	}
+
+	// Check if the font size is greater than 12
 	if (fontDialog->Font->Size > 12)
 	{
-		
-		//встановлення 14 шрифта
-		tlpTable->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12);
-		//Встановлення шрифта для всіх елементів Kursova в циклі
-		for (int i = 0; i < this->Controls->Count; i++)
+		// Set font size to 12
+		System::Drawing::Font^ newFont = gcnew System::Drawing::Font("Microsoft Sans Serif", 12);
+
+		// Set font for the table layout panel
+		tlpTable->Font = newFont;
+
+		// Iterate through all controls on the form and set the font
+		for each (Control ^ control in this->Controls)
 		{
-			this->Controls[i]->Font = gcnew System::Drawing::Font("Microsoft Sans Serif", 12);
+			control->Font = newFont;
+		}
+
+		// Iterate through items in the context menu and set the font
+		for each (ToolStripItem ^ item in cmsMenu->Items)
+		{
+			item->Font = newFont;
 		}
 	}
-
-	
 
 	return System::Void();
 }
@@ -439,72 +460,212 @@ System::Void KursovaOOP::Kursova::tsmiTheme_Click(System::Object^ sender, System
 {
 	ColorDialog^ colorDialog = gcnew ColorDialog();
 	colorDialog->ShowDialog();
+
+	// Set background color for the table layout panel
 	tlpTable->BackColor = colorDialog->Color;
-	//Встановлення кольору для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
-	{
-		this->Controls[i]->BackColor = colorDialog->Color;
-	}
-	//встановлюємо контрастний колір букв для всіх елементів Kursova в циклі
-	//визначаємо контрастний колір для кольору фону
+
+	// Determine contrasting color for text using colorDialog->Color
 	int r = colorDialog->Color.R;
 	int g = colorDialog->Color.G;
 	int b = colorDialog->Color.B;
 	int contrast = (r * 299 + g * 587 + b * 114) / 1000;
-	if (contrast > 125)
+
+	// Determine contrasting color for text
+	Color textColor = (contrast > 125) ? System::Drawing::Color::Black : System::Drawing::Color::White;
+
+	// Iterate through all controls on the form and set the background and text color
+	for each (Control ^ control in this->Controls)
 	{
-		//встановлюємо колір букв чорним для всіх елементів Kursova в циклі
-		for (int i = 0; i < this->Controls->Count; i++)
-		{
-			this->Controls[i]->ForeColor = System::Drawing::Color::Black;
-		}
-	}
-	else
-	{
-		//встановлюємо колір букв білим для всіх елементів Kursova в циклі
-		for (int i = 0; i < this->Controls->Count; i++)
-		{
-			this->Controls[i]->ForeColor = System::Drawing::Color::White;
-		}
+		control->BackColor = colorDialog->Color;
+		control->ForeColor = textColor;
 	}
 
-	
+	// Iterate through items in the context menu and set the background and text color
+	for each (ToolStripItem ^ item in cmsMenu->Items)
+	{
+		item->BackColor = colorDialog->Color;
+		item->ForeColor = textColor;
+	}
+
+	// Iterate through items in tbMenu and set the background and text color
+	for each (ToolStripItem ^ item in tbMenu->Items)
+	{
+		item->BackColor = colorDialog->Color;
+		item->ForeColor = textColor;
+	}
+
+	// Iterate through items in msFile (ToolStripDropDownButton) and set the background and text color
+	for each (ToolStripItem ^ item in msFile->DropDownItems)
+	{
+		item->BackColor = colorDialog->Color;
+		item->ForeColor = textColor;
+	}
+
+	// Iterate through items in msSort (ToolStripDropDownButton) and set the background and text color
+	for each (ToolStripItem ^ item in msSort->DropDownItems)
+	{
+		item->BackColor = colorDialog->Color;
+		item->ForeColor = textColor;
+	}
+
+	// Iterate through items in tsddbStyle (ToolStripDropDownButton) and set the background and text color
+	for each (ToolStripItem ^ item in tsddbStyle->DropDownItems)
+	{
+		item->BackColor = colorDialog->Color;
+		item->ForeColor = textColor;
+	}
+
+	// Set render mode to Professional to force color changes
+	if (cmsMenu->Renderer != nullptr)
+	{
+		ToolStripProfessionalRenderer^ renderer = gcnew ToolStripProfessionalRenderer();
+		renderer->ColorTable->UseSystemColors = false;
+		cmsMenu->Renderer = renderer;
+	}
+
 	return System::Void();
 }
 
-System::Void KursovaOOP::Kursova::tsmiDarck_Click(System::Object^ sender, System::EventArgs^ e)
+
+
+
+System::Void KursovaOOP::Kursova::tsddmSelect_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	ColorDialog^ colorDialog = gcnew ColorDialog();
-	colorDialog->ShowDialog();
-	tlpTable->BackColor = colorDialog->Color;
-	//Встановлення кольору для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
-	{
-		this->Controls[i]->BackColor = colorDialog->Color;
+	System::String^ text = tsddmtbSelect->Text;
+
+	try {
+		int index = Convert::ToInt32(text);
+
+		if (index > 0 && index <= Current->getSize()) {
+			Song& song = Current->at(index - 1).data;
+
+			std::wstring songersString;
+			for (int i = 0; i < song.getSongers().size(); i++) {
+				if (i > 0) {
+					songersString += L", ";
+				}
+				songersString += song.getSongers()[i];
+			}
+			tsddmtbSongers->Text = gcnew String(songersString.c_str());
+			tsddmtbName->Text = gcnew String(song.getName().c_str());
+			tsddmtbAlbom->Text = gcnew String(song.getAlbom().c_str());
+			tsddmtbYear->Text = song.getYear().ToString();
+			tsddmtbDuration->Text = song.getDuration().ToString();
+			tsddmtbFormat->Text = gcnew String(song.getFormat().c_str());
+			tsddmtbSize->Text = song.getSize().ToString();
+			tsddmtbIsImport->Text = song.getIsImport() ? L"Так" : L"Ні";
+		}
+		else {
+			MessageBox::Show(L"Неправильний індекс. Введіть правельний");
+		}
 	}
-	//встановлюємо колір букв сірим для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
-	{
-		this->Controls[i]->ForeColor = System::Drawing::Color::Gray;
+	catch (System::FormatException^) {
+		MessageBox::Show(L"Неправильинй формат. Введіть число");
 	}
+
 	return System::Void();
 }
-
-System::Void KursovaOOP::Kursova::tsmiLight_Click(System::Object^ sender, System::EventArgs^ e)
+System::Void KursovaOOP::Kursova::cmsEdit_Click(System::Object^ sender, System::EventArgs^ e)
 {
-	ColorDialog^ colorDialog = gcnew ColorDialog();
-	colorDialog->ShowDialog();
-	tlpTable->BackColor = colorDialog->Color;
-	//Встановлення кольору для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
+
+	System::String^ text = tsddmtbSelect->Text;
+	int index = Convert::ToInt32(text);
+
+	Song& song = Current->at(index-1).data;
+
+	// Дані про виконавців
+	if (!String::IsNullOrEmpty(tsddmtbSongers->Text))
 	{
-		this->Controls[i]->BackColor = colorDialog->Color;
+		std::vector<std::wstring> songers;
+		// Виконавці розділені комою
+		std::wstring songersString = msclr::interop::marshal_as<std::wstring>(tsddmtbSongers->Text);
+		std::wstring delimiter = L",";
+		size_t pos = 0;
+		std::wstring token;
+		while ((pos = songersString.find(delimiter)) != std::wstring::npos) {
+			token = songersString.substr(0, pos);
+			songers.push_back(token);
+			songersString.erase(0, pos + delimiter.length());
+		}
+		// Додаємо залишок рядка після останньої коми (або весь рядок, якщо ком не знайдено)
+		songers.push_back(songersString);
+		song.setSongers(songers);
 	}
-	//встановлюємо колір букв чорним для всіх елементів Kursova в циклі
-	for (int i = 0; i < this->Controls->Count; i++)
+
+	// Дані про назву
+	if (!String::IsNullOrEmpty(tsddmtbName->Text))
 	{
-		this->Controls[i]->ForeColor = System::Drawing::Color::Black;
+		std::wstring name = msclr::interop::marshal_as<std::wstring>(tsddmtbName->Text);
+		song.setName(name);
 	}
+
+	// Дані про альбом
+	if (!String::IsNullOrEmpty(tsddmtbAlbom->Text))
+	{
+		std::wstring albom = msclr::interop::marshal_as<std::wstring>(tsddmtbAlbom->Text);
+		song.setAlbom(albom);
+	}
+
+	// Дані про рік
+	if (!String::IsNullOrEmpty(tsddmtbYear->Text))
+	{
+		int year;
+		if (Int32::TryParse(tsddmtbYear->Text, year)) {
+			song.setYear(year);
+		}
+		else {
+			MessageBox::Show(L"Введіть правильний рік");
+			return;
+		}
+	}
+
+	// Дані про тривалість
+	if (!String::IsNullOrEmpty(tsddmtbDuration->Text))
+	{
+		double duration;
+		if (Double::TryParse(tsddmtbDuration->Text, duration)) {
+			song.setDuration(duration);
+		}
+		else {
+			MessageBox::Show(L"Введіть правильну тривалість");
+			return;
+		}
+	}
+
+	// Дані про формат
+	if (!String::IsNullOrEmpty(tsddmtbFormat->Text))
+	{
+		std::wstring format = msclr::interop::marshal_as<std::wstring>(tsddmtbFormat->Text);
+		song.setFormat(format);
+	}
+
+	// Дані про розмір
+	if (!String::IsNullOrEmpty(tsddmtbSize->Text))
+	{
+		double size;
+		if (Double::TryParse(tsddmtbSize->Text, size)) {
+			song.setSize(size);
+		}
+		else {
+			MessageBox::Show(L"Введіть правильний розмір");
+			return;
+		}
+	}
+
+	// Дані про зарубіжність
+	if (!String::IsNullOrEmpty(tsddmtbIsImport->Text))
+	{
+		std::wstring isImport = msclr::interop::marshal_as<std::wstring>(tsddmtbIsImport->Text);
+		if (isImport == L"Так") {
+			song.setIsImport(true);
+		}
+		else
+		{
+			song.setIsImport(false);
+		}
+	}
+
+	UpdateTable(*Current);
 	return System::Void();
 }
 
