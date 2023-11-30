@@ -600,7 +600,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			});
 			this->tbMenu->Location = System::Drawing::Point(0, 0);
 			this->tbMenu->Name = L"tbMenu";
-			this->tbMenu->Size = System::Drawing::Size(602, 31);
+			this->tbMenu->Size = System::Drawing::Size(602, 27);
 			this->tbMenu->TabIndex = 2;
 			this->tbMenu->Text = L"toolStrip1";
 			// 
@@ -715,7 +715,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->tsddbStyle->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"tsddbStyle.Image")));
 			this->tsddbStyle->ImageTransparentColor = System::Drawing::Color::Magenta;
 			this->tsddbStyle->Name = L"tsddbStyle";
-			this->tsddbStyle->Size = System::Drawing::Size(63, 28);
+			this->tsddbStyle->Size = System::Drawing::Size(63, 24);
 			this->tsddbStyle->Text = L"Стиль";
 			// 
 			// tsmiFont
@@ -742,7 +742,7 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			this->cmsMenu->Name = L"contextMenuStrip1";
 			this->cmsMenu->RenderMode = System::Windows::Forms::ToolStripRenderMode::System;
 			this->cmsMenu->ShowImageMargin = false;
-			this->cmsMenu->Size = System::Drawing::Size(177, 124);
+			this->cmsMenu->Size = System::Drawing::Size(186, 152);
 			this->cmsMenu->Text = L"cmsMenu";
 			// 
 			// cmsAdd
@@ -823,16 +823,18 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tsddmtbIsImport
 			});
 			this->cmsEdit->Name = L"cmsEdit";
-			this->cmsEdit->Size = System::Drawing::Size(176, 24);
+			this->cmsEdit->Size = System::Drawing::Size(185, 24);
 			this->cmsEdit->Text = L"Редагувати";
+			this->cmsEdit->ToolTipText = L"Натисніть коли внесете зміни";
 			this->cmsEdit->Click += gcnew System::EventHandler(this, &Kursova::cmsEdit_Click);
 			// 
 			// tsddmSelect
 			// 
 			this->tsddmSelect->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->tsddmtbSelect });
 			this->tsddmSelect->Name = L"tsddmSelect";
-			this->tsddmSelect->Size = System::Drawing::Size(174, 26);
+			this->tsddmSelect->Size = System::Drawing::Size(224, 26);
 			this->tsddmSelect->Text = L"Вибрати";
+			this->tsddmSelect->ToolTipText = L"Натисніть коли введете індекс";
 			this->tsddmSelect->Click += gcnew System::EventHandler(this, &Kursova::tsddmSelect_Click);
 			// 
 			// tsddmtbSelect
@@ -902,8 +904,9 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 			// 
 			this->cmsDelete->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(1) { this->cmstbDelete });
 			this->cmsDelete->Name = L"cmsDelete";
-			this->cmsDelete->Size = System::Drawing::Size(176, 24);
+			this->cmsDelete->Size = System::Drawing::Size(185, 24);
 			this->cmsDelete->Text = L"Видалити";
+			this->cmsDelete->ToolTipText = L"Натисніть коли введете індекс";
 			this->cmsDelete->Click += gcnew System::EventHandler(this, &Kursova::cmsDelete_Click);
 			// 
 			// cmstbDelete
@@ -920,8 +923,9 @@ private: System::Windows::Forms::ToolStripTextBox^ tstbIsImport;
 					this->tstbName, this->tstbAlbom, this->tstbYear, this->tstbDuration, this->tstbFormat, this->tstbSize, this->tstbIsImport
 			});
 			this->tsmiSearch->Name = L"tsmiSearch";
-			this->tsmiSearch->Size = System::Drawing::Size(176, 24);
+			this->tsmiSearch->Size = System::Drawing::Size(185, 24);
 			this->tsmiSearch->Text = L"Детальний пошук";
+			this->tsmiSearch->ToolTipText = L"Натисніть коли заповните потрібні поля";
 			this->tsmiSearch->Click += gcnew System::EventHandler(this, &Kursova::tsmiSearch_Click);
 			// 
 			// tstbSongers
